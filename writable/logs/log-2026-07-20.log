@@ -2,3 +2,15 @@ CRITICAL - 2026-07-20 06:00:09 --> ErrorException: Cannot redeclare Config\Datab
 [Method: CLI, Route: db:table/operateur]
 in APPPATH/Config/Database.php on line 49.
  1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-07-20 06:54:17 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "prefixe/gestion_prefixe.php"
+[Method: GET, Route: admin/prefixes]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/PrefixeController.php(18): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\PrefixeController->index()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
