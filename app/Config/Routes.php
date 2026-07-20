@@ -5,5 +5,18 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'AuthController::login');
+$routes->get('login', 'AuthController::login');
+$routes->post('login/attempt', 'AuthController::attemptLogin');
+$routes->get('logout', 'AuthController::logout');
 $routes->get('admin/prefixes', 'PrefixeController::index');
+
+$routes->get('admin/clients', 'ClientController::index');
+$routes->get('admin/clients/create', 'ClientController::create');
+$routes->post('admin/clients/store', 'ClientController::store');
+$routes->get('admin/clients/edit/(:num)', 'ClientController::edit/$1');
+$routes->post('admin/clients/update/(:num)', 'ClientController::update/$1');
+$routes->get('admin/clients/delete/(:num)', 'ClientController::delete/$1');
+
+$routes->get('client/login/(:any)', 'ClientController::login/$1');
+$routes->get('client/dashboard', 'ClientController::dashboard');
