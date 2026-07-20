@@ -23,25 +23,29 @@ $operations = $operations ?? [];
         <th>Expéditeur</th>
         <th>Récepteur</th>
         <th>Montant</th>
-        <th>Frais</th>
+        <th>Frais transfert</th>
+        <th>Frais retrait</th>
+        <th>Total reçu</th>
     </tr>
     </thead>
     <tbody>
     <?php if (empty($operations)): ?>
         <tr>
-            <td colspan="6" class="text-center">Aucune opération enregistrée.</td>
+            <td colspan="8" class="text-center">Aucune opération enregistrée.</td>
         </tr>
     <?php else: ?>
-        <?php foreach ($operations as $operation): ?>
-            <tr>
-                <td><?= esc($operation['date_operation']) ?></td>
-                <td><?= esc($operation['type_operation_nom'] ?? '') ?></td>
-                <td><?= esc($operation['expediteur_telephone'] ?? '-') ?></td>
-                <td><?= esc($operation['recepteur_telephone'] ?? '-') ?></td>
-                <td><?= number_format((float) $operation['montant'], 2, ',', ' ') ?> Ar</td>
-                <td><?= number_format((float) $operation['frais'], 2, ',', ' ') ?> Ar</td>
-            </tr>
-        <?php endforeach; ?>
+            <?php foreach ($operations as $operation): ?>
+                <tr>
+                    <td><?= esc($operation['date_operation']) ?></td>
+                    <td><?= esc($operation['type_operation_nom'] ?? '') ?></td>
+                    <td><?= esc($operation['expediteur_telephone'] ?? '-') ?></td>
+                    <td><?= esc($operation['recepteur_telephone'] ?? '-') ?></td>
+                    <td class="text-success fw-semibold"><?= number_format((float) $operation['montant'], 2, ',', ' ') ?> Ar</td>
+                    <td><?= number_format((float) ($operation['frais'] - ($operation['frais_retrait'] ?? 0)), 2, ',', ' ') ?> Ar</td>
+                    <td><?= number_format((float) ($operation['frais_retrait'] ?? 0), 2, ',', ' ') ?> Ar</td>
+                    <td class="text-primary fw-semibold"><?= number_format((float) ($operation['montant'] + ($operation['frais_retrait'] ?? 0)), 2, ',', ' ') ?> Ar</td>
+                </tr>
+            <?php endforeach; ?>
     <?php endif; ?>
     </tbody>
 </table>

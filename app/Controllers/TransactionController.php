@@ -228,6 +228,12 @@ class TransactionController extends BaseController {
         }
 
         $total = $montant + $frais + $commission;
+        $inclureFraisRetrait = $this->request->getPost('inclure_frais_retrait') === '1';
+
+        $fraisTransfert = $this->calculerFrais(3, $montant);
+        $fraisRetrait = $inclureFraisRetrait ? $this->calculerFrais(2, $montant) : 0.0;
+        $frais = $fraisTransfert + $fraisRetrait;
+        $total = $montant + $frais;
 
         if ((float) $client['solde'] < $total) {
             return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission.');
@@ -239,7 +245,11 @@ class TransactionController extends BaseController {
             'recepteur' => $recepteur['id'],
             'montant' => $montant,
             'frais' => $frais,
+<<<<<<< Updated upstream
             'commission' => $commission,
+=======
+            'frais_retrait' => $fraisRetrait,
+>>>>>>> Stashed changes
             'date_operation' => date('Y-m-d H:i:s'),
         ]);
 
@@ -248,13 +258,20 @@ class TransactionController extends BaseController {
         ]);
 
         $this->utilisateurModel->update($recepteur['id'], [
-            'solde' => (float) $recepteur['solde'] + $montant,
+            'solde' => (float) $recepteur['solde'] + $montant + $fraisRetrait,
         ]);
 
         $message = 'Transfert de ' . number_format($montant, 2, ',', ' ') . ' Ar effectué avec succès vers ' . esc($recepteurTelephone) . '.';
 
         if ($frais > 0) {
-            $message .= ' Frais appliqués : ' . number_format($frais, 2, ',', ' ') . ' Ar.';
+            $parts = [];
+            if ($fraisTransfert > 0) {
+                $parts[] = 'frais de transfert : ' . number_format($fraisTransfert, 2, ',', ' ') . ' Ar';
+            }
+            if ($fraisRetrait > 0) {
+                $parts[] = 'frais de retrait : ' . number_format($fraisRetrait, 2, ',', ' ') . ' Ar';
+            }
+            $message .= ' ' . ucfirst(implode(', ', $parts)) . '.';
         }
 
         if ($commission > 0) {

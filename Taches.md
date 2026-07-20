@@ -42,21 +42,21 @@
 - Creation de la page de transfert.
 - Creation de la page d'historique.
 
-
 ## Version 2
 
 ### Ismael
 
 #### Backend
-- Ajout de l'option d'inclure les frais de retrait lors d'un transfert.
-- Développement de l'envoi multiple vers plusieurs numéros.
-- Calcul automatique du montant reçu par chaque destinataire.
-- Adaptation des transactions pour les envois multiples.
+- Ajout de l'option « Inclure les frais de retrait » lors d'un transfert entre clients du même opérateur.
+- Validation qu'un envoi multiple est autorisé uniquement vers des numéros appartenant au même opérateur.
+- Développement de l'envoi multiple avec répartition automatique du montant.
+- Mise à jour du traitement des transactions selon les nouvelles règles.
 
 #### Frontend
-- Ajout de l'option « Inclure les frais de retrait ».
-- Interface d'envoi multiple.
-- Affichage du récapitulatif des montants envoyés.
+- Ajout de la case « Inclure les frais de retrait ».
+- Développement de l'interface d'envoi multiple.
+- Affichage des erreurs lorsque les numéros appartiennent à un autre opérateur.
+- Affichage du récapitulatif de l'envoi.
 
 ---
 
@@ -64,12 +64,12 @@
 
 #### Backend
 - Configuration des préfixes des autres opérateurs.
-- Configuration du pourcentage de commission pour les transferts vers les autres opérateurs.
-- Séparation des gains de l'opérateur et des autres opérateurs.
+- Gestion des commissions supplémentaires (%) pour les transferts vers les autres opérateurs.
+- Séparation des gains de l'opérateur et des autres opérateurs dans les statistiques.
 - Calcul des montants à reverser à chaque opérateur.
 
 #### Frontend
 - Interface de gestion des préfixes des autres opérateurs.
 - Interface de gestion des commissions.
 - Mise à jour de la page « Situation des gains ».
-- Création de la page « Situation des montants à envoyer aux opérateurs ».
+- Création de la page « Situation des montants à envoyer à chaque opérateur ».
