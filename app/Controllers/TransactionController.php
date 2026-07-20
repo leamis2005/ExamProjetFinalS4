@@ -274,6 +274,156 @@ class TransactionController extends BaseController {
         return redirect()->to('client/dashboard')->with('message', $message);
     }
 
+    public function transfertMultiple() {
+        $clientId = session()->get('client_id');
+
+        if (!$clientId) {
+            return redirect()->to('login')->with('error', 'Veuillez vous connecter.');
+        }
+
+        $client = $this->utilisateurModel->getClientById($clientId);
+
+        if (!$client) {
+            return redirect()->to('login')->with('error', 'Client introuvable.');
+        }
+
+        return view('client/transfert_multiple', ['client' => $client]);
+    }
+
+    public function effectuerTransfertMultiple() {
+        $clientId = session()->get('client_id');
+
+        if (!$clientId) {
+            return redirect()->to('login')->with('error', 'Veuillez vous connecter.');
+        }
+
+        $client = $this->utilisateurModel->getClientById($clientId);
+
+        if (!$client) {
+            return redirect()->to('login')->with('error', 'Client introuvable.');
+        }
+
+        $rules = [
+            'telephones' => 'required',
+            'montant' => 'required|numeric|greater_than_equal_to[100]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $telephonesInput = $this->request->getPost('telephones');
+        $telephones = array_filter(array_map('trim', preg_split('/[\r\n,]+/', $telephonesInput)), fn($t) => $t !== '');
+        $montantTotal = (float) $this->request->getPost('montant');
+        $inclureFraisRetrait = $this->request->getPost('inclure_frais_retrait') === '1';
+
+        if (empty($telephones)) {
+            return redirect()->back()->withInput()->with('error', 'Veuillez saisir au moins un numéro de téléphone.');
+        }
+
+        $destinataires = [];
+        $operateurs = [];
+
+        foreach ($telephones as $telephone) {
+            if (strlen($telephone) < 10) {
+                return redirect()->back()->withInput()->with('error', "Le numéro $telephone est invalide.");
+            }
+
+            $utilisateur = $this->utilisateurModel->getClientByTelephone($telephone);
+
+            if (!$utilisateur) {
+                return redirect()->back()->withInput()->with('error', "Le numéro $telephone n'est pas enregistré.");
+            }
+
+            if ((int) $utilisateur['id'] === (int) $clientId) {
+                return redirect()->back()->withInput()->with('error', "Vous ne pouvez pas vous transférer à vous-même ($telephone).");
+            }
+
+            $operateur = $this->prefixeModel->getOperateurByTelephone($telephone);
+            $operateurs[$telephone] = $operateur['nom'] ?? 'autre operateur';
+            $destinataires[$telephone] = $utilisateur;
+        }
+
+        $operateursUniques = array_unique($operateurs);
+
+        if (count($operateursUniques) > 1) {
+            $erreurs = [];
+            foreach ($telephones as $telephone) {
+                $erreurs[] = "$telephone : " . ($operateurs[$telephone] ?? 'autre operateur');
+            }
+            return redirect()->back()->withInput()->with('error', 'Tous les destinataires doivent appartenir au même opérateur. Opérateurs détectés : ' . implode(', ', $erreurs));
+        }
+
+        $nombreDestinataires = count($destinataires);
+        $montantParDestinataire = $montantTotal / $nombreDestinataires;
+
+        $fraisTransfertUnitaire = $this->calculerFrais(3, $montantParDestinataire);
+        $fraisRetraitUnitaire = $inclureFraisRetrait ? $this->calculerFrais(2, $montantParDestinataire) : 0.0;
+        $fraisUnitaire = $fraisTransfertUnitaire;
+
+        $expediteurTelephone = $client['telephone'];
+        $operateurExpediteur = $this->prefixeModel->getOperateurByTelephone($expediteurTelephone);
+        $operateurRecepteurNom = reset($operateursUniques);
+        $operateurRecepteur = $this->transactionModel->db->table('operateur')->where('nom', $operateurRecepteurNom)->get()->getFirstRow('array');
+
+        $commission = 0.0;
+        $operateursDifferents = $operateurExpediteur && $operateurRecepteur &&
+                                (int) $operateurExpediteur['id'] !== (int) $operateurRecepteur['id'];
+
+        if ($operateursDifferents) {
+            $pourcentageCommission = (float) $this->parametreModel->getValeur('commission_transfert_inter_operateur', '2.5');
+            $commission = round($montantTotal * ($pourcentageCommission / 100), 2);
+        }
+
+        $totalParDestinataire = $montantParDestinataire + $fraisUnitaire + $fraisRetraitUnitaire;
+        $total = $totalParDestinataire * $nombreDestinataires + $commission;
+
+        if ((float) $client['solde'] < $total) {
+            return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission. Total requis : ' . number_format($total, 2, ',', ' ') . ' Ar.');
+        }
+
+        $this->transactionModel->db->transStart();
+
+        foreach ($destinataires as $recepteur) {
+            $this->transactionModel->insert([
+                'type_operation_id' => 3,
+                'expediteur' => $clientId,
+                'recepteur' => $recepteur['id'],
+                'montant' => $montantParDestinataire,
+                'frais' => $fraisUnitaire,
+                'frais_retrait' => $fraisRetraitUnitaire,
+                'commission' => $commission,
+                'date_operation' => date('Y-m-d H:i:s'),
+            ]);
+
+            $this->utilisateurModel->update($recepteur['id'], [
+                'solde' => (float) $recepteur['solde'] + $montantParDestinataire + $fraisRetraitUnitaire,
+            ]);
+        }
+
+        $this->utilisateurModel->update($clientId, [
+            'solde' => (float) $client['solde'] - $total,
+        ]);
+
+        $this->transactionModel->db->transComplete();
+
+        $message = 'Envoi multiple effectué vers ' . $nombreDestinataires . ' destinataire(s). Chacun a reçu ' . number_format($montantParDestinataire, 2, ',', ' ') . ' Ar.';
+
+        if ($fraisUnitaire > 0) {
+            $message .= ' Frais de transfert par destinataire : ' . number_format($fraisUnitaire, 2, ',', ' ') . ' Ar.';
+        }
+
+        if ($fraisRetraitUnitaire > 0) {
+            $message .= ' Frais de retrait par destinataire : ' . number_format($fraisRetraitUnitaire, 2, ',', ' ') . ' Ar.';
+        }
+
+        if ($commission > 0) {
+            $message .= ' Commission inter-opérateur : ' . number_format($commission, 2, ',', ' ') . ' Ar.';
+        }
+
+        return redirect()->to('client/dashboard')->with('message', $message);
+    }
+
     public function historique() {
         $clientId = session()->get('client_id');
 
