@@ -47,11 +47,11 @@ class CreateTransactionMmTable extends Migration
         $this->forge->addForeignKey('type_operation_id', 'type_operation', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('expediteur', 'utilisateur', 'id', 'CASCADE', 'SET NULL');
         $this->forge->addForeignKey('recepteur', 'utilisateur', 'id', 'CASCADE', 'SET NULL');
-        $this->forge->createTable('transaction_mm');
+        $this->forge->createTable('transaction_mm', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('transaction_mm');
+        $this->forge->dropTable('transaction_mm', true);
     }
 }

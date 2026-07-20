@@ -51,6 +51,14 @@ CREATE TABLE transaction_mm (
     FOREIGN KEY (recepteur) REFERENCES utilisateur(id)
 );
 
+CREATE TABLE commission (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pourcentage REAL NOT NULL
+);
+
+INSERT INTO commission(pourcentage)
+VALUES (5);
+
 INSERT INTO operateur(nom)
 VALUES
 ('Orange'),

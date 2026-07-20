@@ -27,11 +27,11 @@ class CreatePrefixeTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('prefixe');
         $this->forge->addForeignKey('operateur_id', 'operateur', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('prefixe');
+        $this->forge->createTable('prefixe', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('prefixe');
+        $this->forge->dropTable('prefixe', true);
     }
 }

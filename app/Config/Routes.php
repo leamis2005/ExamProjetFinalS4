@@ -35,3 +35,6 @@ $routes->get('client/historique', 'TransactionController::historique', ['filter'
 $routes->get('client/depot', 'TransactionController::depot', ['filter' => 'auth']);
 $routes->post('client/depot/effectuer', 'TransactionController::effectuerDepot', ['filter' => 'auth']);
 $routes->get('admin/tableau-de-bord', 'TableauDeBordController::index', ['filter' => 'auth']);
+$routes->get('admin/commission', 'CommissionController::index', ['filter' => 'auth']);
+$routes->post('admin/commission/update', 'CommissionController::update', ['filter' => 'auth']);
+$routes->get('admin/situation', 'SituationController::index', ['filter' => 'auth']);

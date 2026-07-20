@@ -4,18 +4,25 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BaremeFraisModel;
+use App\Models\ParametreModel;
 use App\Models\UtilisateurModel;
 use App\Models\TransactionMmModel;
+use App\Models\CommissionModel;
+use App\Models\PrefixeModel;
 
 class TransactionController extends BaseController {
     protected $utilisateurModel;
     protected $transactionModel;
     protected $baremeFraisModel;
+    protected $parametreModel;
+    protected $prefixeModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->transactionModel = new TransactionMmModel();
         $this->baremeFraisModel = new BaremeFraisModel();
+        $this->parametreModel = new ParametreModel();
+        $this->prefixeModel = new PrefixeModel();
     }
 
     protected function calculerFrais(int $typeOperationId, float $montant): float {
@@ -206,10 +213,30 @@ class TransactionController extends BaseController {
 
         $montant = (float) $this->request->getPost('montant');
         $frais = $this->calculerFrais(3, $montant);
+
+        $expediteurTelephone = $client['telephone'];
+        $operateurExpediteur = $this->prefixeModel->getOperateurByTelephone($expediteurTelephone);
+        $operateurRecepteur = $this->prefixeModel->getOperateurByTelephone($recepteurTelephone);
+
+        $commission = 0.0;
+        $operateursDifferents = $operateurExpediteur && $operateurRecepteur &&
+                                (int) $operateurExpediteur['id'] !== (int) $operateurRecepteur['id'];
+
+        if ($operateursDifferents) {
+            $pourcentageCommission = (float) $this->parametreModel->getValeur('commission_transfert_inter_operateur', '2.5');
+            $commission = round($montant * ($pourcentageCommission / 100), 2);
+        }
+
+        $total = $montant + $frais + $commission;
+        $inclureFraisRetrait = $this->request->getPost('inclure_frais_retrait') === '1';
+
+        $fraisTransfert = $this->calculerFrais(3, $montant);
+        $fraisRetrait = $inclureFraisRetrait ? $this->calculerFrais(2, $montant) : 0.0;
+        $frais = $fraisTransfert + $fraisRetrait;
         $total = $montant + $frais;
 
         if ((float) $client['solde'] < $total) {
-            return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant et les frais.');
+            return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission.');
         }
 
         $this->transactionModel->insert([
@@ -218,6 +245,11 @@ class TransactionController extends BaseController {
             'recepteur' => $recepteur['id'],
             'montant' => $montant,
             'frais' => $frais,
+<<<<<<< Updated upstream
+            'commission' => $commission,
+=======
+            'frais_retrait' => $fraisRetrait,
+>>>>>>> Stashed changes
             'date_operation' => date('Y-m-d H:i:s'),
         ]);
 
@@ -226,13 +258,24 @@ class TransactionController extends BaseController {
         ]);
 
         $this->utilisateurModel->update($recepteur['id'], [
-            'solde' => (float) $recepteur['solde'] + $montant,
+            'solde' => (float) $recepteur['solde'] + $montant + $fraisRetrait,
         ]);
 
         $message = 'Transfert de ' . number_format($montant, 2, ',', ' ') . ' Ar effectué avec succès vers ' . esc($recepteurTelephone) . '.';
 
         if ($frais > 0) {
-            $message .= ' Frais appliqués : ' . number_format($frais, 2, ',', ' ') . ' Ar.';
+            $parts = [];
+            if ($fraisTransfert > 0) {
+                $parts[] = 'frais de transfert : ' . number_format($fraisTransfert, 2, ',', ' ') . ' Ar';
+            }
+            if ($fraisRetrait > 0) {
+                $parts[] = 'frais de retrait : ' . number_format($fraisRetrait, 2, ',', ' ') . ' Ar';
+            }
+            $message .= ' ' . ucfirst(implode(', ', $parts)) . '.';
+        }
+
+        if ($commission > 0) {
+            $message .= ' Commission inter-opérateur : ' . number_format($commission, 2, ',', ' ') . ' Ar.';
         }
 
         return redirect()->to('client/dashboard')->with('message', $message);

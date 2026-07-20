@@ -21,11 +21,11 @@ class CreateTypeUtilisateurTable extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('nom');
-        $this->forge->createTable('type_utilisateur');
+        $this->forge->createTable('type_utilisateur', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('type_utilisateur');
+        $this->forge->dropTable('type_utilisateur', true);
     }
 }

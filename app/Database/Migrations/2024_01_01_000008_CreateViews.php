@@ -8,12 +8,14 @@ class CreateViews extends Migration
 {
     public function up()
     {
+        $this->db->query('DROP VIEW IF EXISTS v_gain_operateur');
         $this->db->query('
             CREATE VIEW v_gain_operateur AS
             SELECT SUM(frais) AS gain_total
             FROM transaction_mm
         ');
 
+        $this->db->query('DROP VIEW IF EXISTS v_situation_client');
         $this->db->query('
             CREATE VIEW v_situation_client AS
             SELECT

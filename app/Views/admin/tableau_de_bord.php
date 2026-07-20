@@ -8,6 +8,7 @@
 
 <?php
 $gainTotal = $gainTotal ?? 0;
+$commissionInterOperateur = $commissionInterOperateur ?? 0;
 $clientsCount = $clientsCount ?? 0;
 $operationsRecentes = $operationsRecentes ?? [];
 $situationClients = $situationClients ?? [];
@@ -44,6 +45,33 @@ $situationClients = $situationClients ?? [];
     </div>
 </div>
 
+<div class="row g-3 mb-4 animate-fade-in">
+    <div class="col-md-4">
+        <div class="card card-accent green">
+            <div class="card-body">
+                <h6 class="text-muted">Gains opérateur</h6>
+                <h3 class="mb-0"><?= number_format((float) $gainTotal, 2, ',', ' ') ?> Ar</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-accent blue">
+            <div class="card-body">
+                <h6 class="text-muted">Commissions inter-opérateurs</h6>
+                <h3 class="mb-0"><?= number_format((float) $commissionInterOperateur, 2, ',', ' ') ?> Ar</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-accent yellow">
+            <div class="card-body">
+                <h6 class="text-muted">Comptes clients</h6>
+                <h3 class="mb-0"><?= (int) $clientsCount ?></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row g-3">
     <div class="col-lg-7 animate-fade-in">
         <div class="card border-0 shadow-sm">
@@ -51,12 +79,13 @@ $situationClients = $situationClients ?? [];
             <div class="card-body p-0">
                 <table class="table table-hover mb-0">
                     <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Montant</th>
-                        <th>Frais</th>
-                    </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Montant</th>
+                            <th>Frais</th>
+                            <th>Commission</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <?php if (empty($operationsRecentes)): ?>
@@ -81,6 +110,7 @@ $situationClients = $situationClients ?? [];
                                 </td>
                                 <td class="text-success fw-semibold"><?= number_format((float) $operation['montant'], 2, ',', ' ') ?> Ar</td>
                                 <td class="text-danger"><?= number_format((float) $operation['frais'], 2, ',', ' ') ?> Ar</td>
+                                <td class="text-warning fw-semibold"><?= number_format((float) ($operation['commission'] ?? 0), 2, ',', ' ') ?> Ar</td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
