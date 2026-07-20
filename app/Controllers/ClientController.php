@@ -6,16 +6,19 @@ use App\Controllers\BaseController;
 use App\Models\UtilisateurModel;
 use App\Models\TypeUtilisateurModel;
 use App\Models\PrefixeModel;
+use App\Models\TransactionMmModel;
 
 class ClientController extends BaseController {
     protected $utilisateurModel;
     protected $typeUtilisateurModel;
     protected $prefixeModel;
+    protected $transactionModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->typeUtilisateurModel = new TypeUtilisateurModel();
         $this->prefixeModel = new PrefixeModel();
+        $this->transactionModel = new TransactionMmModel();
     }
 
     public function index() {
@@ -141,6 +144,21 @@ class ClientController extends BaseController {
         }
 
         return view('client/dashboard', ['client' => $client]);
+    }
+
+    public function historique(int $id) {
+        $client = $this->utilisateurModel->getClientById($id);
+
+        if (!$client) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Client introuvable');
+        }
+
+        $operations = $this->transactionModel->getHistoriqueByClient($id);
+
+        return view('client/historique_admin', [
+            'client' => $client,
+            'operations' => $operations,
+        ]);
     }
 
     private function prefixeValide(string $telephone): bool {

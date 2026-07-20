@@ -1,5 +1,9 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('admin/sidebar', ['active' => 'clients']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <h1><?= isset($client) ? 'Modifier le client' : 'Nouveau client' ?></h1>

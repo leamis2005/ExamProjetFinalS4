@@ -1,5 +1,9 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('admin/sidebar', ['active' => 'dashboard']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?php
@@ -14,31 +18,39 @@ $situationClients = $situationClients ?? [];
     <a href="<?= site_url('admin/clients') ?>" class="btn btn-outline-secondary">Clients</a>
 </div>
 
-<div class="row g-3 mb-4">
+<div class="row g-3 mb-4 animate-fade-in">
     <div class="col-md-4">
-        <div class="card">
+        <div class="card card-accent green">
             <div class="card-body">
                 <h6 class="text-muted">Gains cumulés</h6>
-                <h3><?= number_format((float) $gainTotal, 2, ',', ' ') ?> Ar</h3>
+                <h3 class="mb-0"><?= number_format((float) $gainTotal, 2, ',', ' ') ?> Ar</h3>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card card-accent blue">
             <div class="card-body">
                 <h6 class="text-muted">Comptes clients</h6>
-                <h3><?= (int) $clientsCount ?></h3>
+                <h3 class="mb-0"><?= (int) $clientsCount ?></h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-accent yellow">
+            <div class="card-body">
+                <h6 class="text-muted">Opérations enregistrées</h6>
+                <h3 class="mb-0"><?= count($operationsRecentes) ?></h3>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row g-3">
-    <div class="col-lg-7">
-        <div class="card">
-            <div class="card-header">Opérations récentes</div>
+    <div class="col-lg-7 animate-fade-in">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">Opérations récentes</div>
             <div class="card-body p-0">
-                <table class="table table-sm mb-0">
+                <table class="table table-hover mb-0">
                     <thead>
                     <tr>
                         <th>Date</th>
@@ -54,9 +66,22 @@ $situationClients = $situationClients ?? [];
                         <?php foreach ($operationsRecentes as $operation): ?>
                             <tr>
                                 <td><?= esc($operation['date_operation']) ?></td>
-                                <td><?= esc($operation['type_operation_nom'] ?? '') ?></td>
-                                <td><?= number_format((float) $operation['montant'], 2, ',', ' ') ?> Ar</td>
-                                <td><?= number_format((float) $operation['frais'], 2, ',', ' ') ?> Ar</td>
+                                <td>
+                                    <?php
+                                    $type = strtolower($operation['type_operation_nom'] ?? '');
+                                    $badgeClass = 'bg-secondary';
+                                    if (str_contains($type, 'dépôt') || str_contains($type, 'depot')) {
+                                        $badgeClass = 'bg-success';
+                                    } elseif (str_contains($type, 'retrait')) {
+                                        $badgeClass = 'bg-danger';
+                                    } elseif (str_contains($type, 'transfert')) {
+                                        $badgeClass = 'bg-warning text-dark';
+                                    }
+                                    ?>
+                                    <span class="badge <?= $badgeClass ?> badge-glow"><?= esc($operation['type_operation_nom'] ?? '') ?></span>
+                                </td>
+                                <td class="text-success fw-semibold"><?= number_format((float) $operation['montant'], 2, ',', ' ') ?> Ar</td>
+                                <td class="text-danger"><?= number_format((float) $operation['frais'], 2, ',', ' ') ?> Ar</td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -65,11 +90,11 @@ $situationClients = $situationClients ?? [];
             </div>
         </div>
     </div>
-    <div class="col-lg-5">
-        <div class="card">
-            <div class="card-header">Situation des comptes clients</div>
+    <div class="col-lg-5 animate-fade-in">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 fw-semibold">Situation des comptes clients</div>
             <div class="card-body p-0">
-                <table class="table table-sm mb-0">
+                <table class="table table-hover mb-0">
                     <thead>
                     <tr>
                         <th>Téléphone</th>
@@ -83,7 +108,9 @@ $situationClients = $situationClients ?? [];
                         <?php foreach ($situationClients as $client): ?>
                             <tr>
                                 <td><?= esc($client['telephone']) ?></td>
-                                <td class="text-end"><?= number_format((float) $client['solde'], 2, ',', ' ') ?> Ar</td>
+                                <td class="text-end fw-semibold <?= (float)$client['solde'] >= 0 ? 'text-success' : 'text-danger' ?>">
+                                    <?= number_format((float) $client['solde'], 2, ',', ' ') ?> Ar
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>

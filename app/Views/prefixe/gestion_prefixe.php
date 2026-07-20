@@ -1,5 +1,9 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('admin/sidebar', ['active' => 'prefixes']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <h1>Gestion des préfixes</h1>

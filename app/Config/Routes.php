@@ -22,6 +22,7 @@ $routes->post('admin/clients/store', 'ClientController::store', ['filter' => 'au
 $routes->get('admin/clients/edit/(:num)', 'ClientController::edit/$1', ['filter' => 'auth']);
 $routes->post('admin/clients/update/(:num)', 'ClientController::update/$1', ['filter' => 'auth']);
 $routes->get('admin/clients/delete/(:num)', 'ClientController::delete/$1', ['filter' => 'auth']);
+$routes->get('admin/clients/historique/(:num)', 'ClientController::historique/$1', ['filter' => 'auth']);
 
 $routes->get('client/login/(:any)', 'ClientController::login/$1', ['filter' => 'auth']);
 $routes->get('client/dashboard', 'ClientController::dashboard', ['filter' => 'auth']);
