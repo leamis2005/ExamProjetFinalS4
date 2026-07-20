@@ -1,50 +1,31 @@
-<h1><?= esc($titre ?? 'Préfixe') ?></h1>
+<?= $this->extend('layout') ?>
 
-<?php if (session()->getFlashdata('message')): ?>
-    <div class="alert alert-success"><?= esc(session()->getFlashdata('message')) ?></div>
-<?php endif; ?>
+<?= $this->section('content') ?>
 
-<?php if (isset($errors)): ?>
-    <div class="alert alert-danger">
-        <ul>
-            <?php foreach ($errors as $error): ?>
-                <li><?= esc($error) ?></li>
-            <?php endforeach; ?>
-        </ul>
+<h1><?= esc($titre) ?></h1>
+
+<form method="post" action="<?= isset($prefixe)
+    ? site_url('admin/prefixes/update/' . $prefixe['id'])
+    : site_url('admin/prefixes/store') ?>" class="w-50">
+    <div class="mb-3">
+        <label for="prefixe" class="form-label">Préfixe</label>
+        <input type="text" class="form-control" id="prefixe" name="prefixe"
+               value="<?= esc($prefixe['prefixe'] ?? old('prefixe')) ?>" required>
+        <div class="form-text">Ex : 032, 033, 034...</div>
     </div>
-<?php endif; ?>
-
-<?php
-    $id       = $prefixe['id'] ?? null;
-    $action   = $id ? site_url('admin/prefixes/modifier/' . $id) : site_url('admin/prefixes/ajouter');
-    $prefixeVal = $prefixe['prefixe'] ?? '';
-    $operateurSelected = $prefixe['operateur_id'] ?? null;
-?>
-
-<?= form_open($action) ?>
-
-    <div class="form-group">
-        <label for="prefixe">Préfixe</label>
-        <input type="text" class="form-control" name="prefixe" id="prefixe"
-               value="<?= esc(old('prefixe', $prefixeVal)) ?>" required>
-    </div>
-
-    <div class="form-group">
-        <label for="operateur_id">Opérateur</label>
-        <select class="form-control" name="operateur_id" id="operateur_id" required>
+    <div class="mb-3">
+        <label for="operateur_id" class="form-label">Opérateur</label>
+        <select class="form-select" id="operateur_id" name="operateur_id" required>
             <option value="">-- Choisir un opérateur --</option>
             <?php foreach ($operateurs as $op): ?>
-                <option value="<?= esc($op->id) ?>"
-                    <?= (old('operateur_id', $operateurSelected) == $op->id) ? 'selected' : '' ?>>
+                <option value="<?= esc($op->id) ?>" <?= isset($prefixe) && $prefixe['operateur_id'] == $op->id ? 'selected' : '' ?>>
                     <?= esc($op->nom) ?>
                 </option>
             <?php endforeach; ?>
         </select>
     </div>
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <a href="<?= site_url('admin/prefixes') ?>" class="btn btn-secondary">Retour</a>
+</form>
 
-    <button type="submit" class="btn btn-primary">
-        <?= $id ? 'Enregistrer les modifications' : 'Ajouter' ?>
-    </button>
-    <a href="<?= site_url('admin/prefixes') ?>" class="btn btn-secondary">Annuler</a>
-
-<?= form_close() ?>
+<?= $this->endSection() ?>

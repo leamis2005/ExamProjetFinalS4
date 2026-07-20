@@ -13,7 +13,6 @@
 <a href="<?= site_url('client/retrait') ?>" class="btn btn-warning me-2">Faire un retrait</a>
 <a href="<?= site_url('client/transfert') ?>" class="btn btn-primary me-2">Faire un transfert</a>
 <a href="<?= site_url('client/historique') ?>" class="btn btn-info me-2">Voir l'historique</a>
-<a href="<?= site_url('admin/clients') ?>" class="btn btn-secondary me-2">Retour</a>
 <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger">Déconnexion</a>
 
 <?= $this->endSection() ?>
