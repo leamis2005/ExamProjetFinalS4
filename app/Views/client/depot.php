@@ -16,6 +16,7 @@
     </div>
     <button type="submit" class="btn btn-success">Effectuer le dépôt</button>
     <a href="<?= site_url('client/dashboard') ?>" class="btn btn-secondary">Retour</a>
+    <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger">Déconnexion</a>
 </form>
 
 <?= $this->endSection() ?>
