@@ -17,7 +17,6 @@ CREATE TABLE type_utilisateur (
 
 CREATE TABLE utilisateur (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom TEXT NOT NULL,
     telephone TEXT UNIQUE NOT NULL,
     solde REAL DEFAULT 0,
     type_utilisateur_id INTEGER NOT NULL,
@@ -71,9 +70,9 @@ VALUES
 ('ADMIN'),
 ('CLIENT');
 
-INSERT INTO utilisateur(nom, telephone, solde, type_utilisateur_id)
+INSERT INTO utilisateur(telephone, solde, type_utilisateur_id)
 VALUES
-('Administrateur','0000000000',0,1);
+('0000000000',0,1);
 
 INSERT INTO type_operation(nom)
 VALUES
