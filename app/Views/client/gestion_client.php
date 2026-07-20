@@ -28,7 +28,11 @@
                     <td><?= number_format((float)$c['solde'], 2, ',', ' ') ?></td>
                     <td>
                         <a href="<?= site_url('admin/clients/edit/' . $c['id']) ?>" class="btn btn-sm btn-warning me-1">Modifier</a>
-                        <a href="<?= site_url('admin/clients/delete/' . $c['id']) ?>" class="btn btn-sm btn-danger me-1" onclick="return confirm('Supprimer ce client ?')">Supprimer</a>
+                        <a href="<?= site_url('admin/clients/edit/' . $c['id']) ?>" class="btn btn-sm btn-warning me-1">Modifier</a>
+                        <form action="<?= site_url('admin/clients/delete/' . $c['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Supprimer ce client ?');">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+                        </form>
                         <a href="<?= site_url('admin/clients/historique/' . $c['id']) ?>" class="btn btn-sm btn-info text-white">Historique</a>
                     </td>
                 </tr>

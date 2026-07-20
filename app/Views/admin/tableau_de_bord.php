@@ -15,7 +15,6 @@ $situationClients = $situationClients ?? [];
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="mb-0">Tableau de bord opérateur</h1>
-    <a href="<?= site_url('admin/clients') ?>" class="btn btn-outline-secondary">Clients</a>
 </div>
 
 <div class="row g-3 mb-4 animate-fade-in">

@@ -22,19 +22,16 @@ $routes->post('admin/clients/store', 'ClientController::store', ['filter' => 'au
 $routes->get('admin/clients/edit/(:num)', 'ClientController::edit/$1', ['filter' => 'auth']);
 $routes->post('admin/clients/update/(:num)', 'ClientController::update/$1', ['filter' => 'auth']);
 $routes->get('admin/clients/delete/(:num)', 'ClientController::delete/$1', ['filter' => 'auth']);
+$routes->post('admin/clients/delete/(:num)', 'ClientController::delete/$1', ['filter' => 'auth']);
 $routes->get('admin/clients/historique/(:num)', 'ClientController::historique/$1', ['filter' => 'auth']);
 
 $routes->get('client/login/(:any)', 'ClientController::login/$1', ['filter' => 'auth']);
 $routes->get('client/dashboard', 'ClientController::dashboard', ['filter' => 'auth']);
+$routes->get('client/retrait', 'TransactionController::retrait', ['filter' => 'auth']);
+$routes->post('client/retrait/effectuer', 'TransactionController::effectuerRetrait', ['filter' => 'auth']);
+$routes->get('client/transfert', 'TransactionController::transfert', ['filter' => 'auth']);
+$routes->post('client/transfert/effectuer', 'TransactionController::effectuerTransfert', ['filter' => 'auth']);
+$routes->get('client/historique', 'TransactionController::historique', ['filter' => 'auth']);
 $routes->get('client/depot', 'TransactionController::depot', ['filter' => 'auth']);
 $routes->post('client/depot/effectuer', 'TransactionController::effectuerDepot', ['filter' => 'auth']);
-$routes->get('client/login/(:any)', 'ClientController::login/$1');
-$routes->get('client/dashboard', 'ClientController::dashboard');
-$routes->get('client/retrait', 'TransactionController::retrait');
-$routes->post('client/retrait/effectuer', 'TransactionController::effectuerRetrait');
-$routes->get('client/transfert', 'TransactionController::transfert');
-$routes->post('client/transfert/effectuer', 'TransactionController::effectuerTransfert');
-$routes->get('client/historique', 'TransactionController::historique');
-$routes->get('client/depot', 'TransactionController::depot');
-$routes->post('client/depot/effectuer', 'TransactionController::effectuerDepot');
-$routes->get('admin/tableau-de-bord', 'TableauDeBordController::index');
+$routes->get('admin/tableau-de-bord', 'TableauDeBordController::index', ['filter' => 'auth']);

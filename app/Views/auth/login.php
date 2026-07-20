@@ -2,7 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<div class="auth-card">
     <div class="brand">
         <h1>Connexion</h1>
         <p>Accédez à votre espace Mobile Money</p>
@@ -18,6 +17,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Se connecter</button>
     </form>
-</div>
 
 <?= $this->endSection() ?>

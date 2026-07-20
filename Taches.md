@@ -41,3 +41,35 @@
 - Creation de la page de retrait.
 - Creation de la page de transfert.
 - Creation de la page d'historique.
+
+
+## Version 2
+
+### Ismael
+
+#### Backend
+- Ajout de l'option d'inclure les frais de retrait lors d'un transfert.
+- Développement de l'envoi multiple vers plusieurs numéros.
+- Calcul automatique du montant reçu par chaque destinataire.
+- Adaptation des transactions pour les envois multiples.
+
+#### Frontend
+- Ajout de l'option « Inclure les frais de retrait ».
+- Interface d'envoi multiple.
+- Affichage du récapitulatif des montants envoyés.
+
+---
+
+### Hiraina
+
+#### Backend
+- Configuration des préfixes des autres opérateurs.
+- Configuration du pourcentage de commission pour les transferts vers les autres opérateurs.
+- Séparation des gains de l'opérateur et des autres opérateurs.
+- Calcul des montants à reverser à chaque opérateur.
+
+#### Frontend
+- Interface de gestion des préfixes des autres opérateurs.
+- Interface de gestion des commissions.
+- Mise à jour de la page « Situation des gains ».
+- Création de la page « Situation des montants à envoyer aux opérateurs ».
