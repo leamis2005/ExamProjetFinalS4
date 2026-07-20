@@ -8,7 +8,7 @@
     <div class="mb-3">
         <label for="telephone" class="form-label">Numéro de téléphone</label>
         <input type="text" class="form-control" id="telephone" name="telephone"
-               placeholder="Ex : 0341234567" value="<?= old('telephone') ?>" required>
+               placeholder="Ex : 03********" value="<?= old('telephone') ?>" required>
         <div class="form-text">Saisissez votre numéro pour une connexion automatique.</div>
     </div>
     <button type="submit" class="btn btn-primary">Se connecter</button>
