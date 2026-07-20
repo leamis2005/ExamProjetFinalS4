@@ -476,6 +476,7 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
 13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
 14 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
 CRITICAL - 2026-07-20 13:01:51 --> ParseError: syntax error, unexpected token "<<", expecting "]"
 [Method: GET, Route: client/depot]
 in APPPATH/Controllers/TransactionController.php on line 248.
@@ -699,6 +700,9 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 ERROR - 2026-07-20 13:17:49 --> Unable to prepare statement: no such table: parametre
+=======
+ERROR - 2026-07-20 13:36:52 --> Unable to prepare statement: no such table: commission
+>>>>>>> Stashed changes
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
  1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
  2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
@@ -706,47 +710,77 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
  4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
  5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
  6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+<<<<<<< Updated upstream
  7 APPPATH/Models/ParametreModel.php(15): CodeIgniter\BaseModel->first()
  8 APPPATH/Controllers/CommissionController.php(16): App\Models\ParametreModel->getValeur()
+=======
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+>>>>>>> Stashed changes
  9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
 10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:17:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: parametre
+=======
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:36:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: commission
+>>>>>>> Stashed changes
 [Method: GET, Route: admin/commission]
 in SYSTEMPATH/Database/BaseConnection.php on line 865.
  1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
  2 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
  3 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+<<<<<<< Updated upstream
  4 APPPATH/Models/ParametreModel.php(15): CodeIgniter\BaseModel->first()
  5 APPPATH/Controllers/CommissionController.php(16): App\Models\ParametreModel->getValeur()
+=======
+ 4 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 5 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+>>>>>>> Stashed changes
  6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
  7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
  8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
  9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 12 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:17:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: parametre
+=======
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:36:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: commission
+>>>>>>> Stashed changes
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
  1 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
  2 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
  3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
  4 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
  5 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+<<<<<<< Updated upstream
  6 APPPATH/Models/ParametreModel.php(15): CodeIgniter\BaseModel->first()
  7 APPPATH/Controllers/CommissionController.php(16): App\Models\ParametreModel->getValeur()
+=======
+ 6 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+>>>>>>> Stashed changes
  8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
  9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 14 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:17:49 --> [Caused by] SQLite3Exception: Unable to prepare statement: no such table: parametre
+=======
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:36:52 --> [Caused by] SQLite3Exception: Unable to prepare statement: no such table: commission
+>>>>>>> Stashed changes
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
  1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
  2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
@@ -754,14 +788,20 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
  4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
  5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
  6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+<<<<<<< Updated upstream
  7 APPPATH/Models/ParametreModel.php(15): CodeIgniter\BaseModel->first()
  8 APPPATH/Controllers/CommissionController.php(16): App\Models\ParametreModel->getValeur()
+=======
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+>>>>>>> Stashed changes
  9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
 10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 ERROR - 2026-07-20 13:30:53 --> table transaction_mm has no column named frais_retrait
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
@@ -774,11 +814,26 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
  7 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  8 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+ERROR - 2026-07-20 13:37:24 --> Unable to prepare statement: no such table: commission
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
 10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:30:53 --> CodeIgniter\Database\Exceptions\DatabaseException: table transaction_mm has no column named frais_retrait
 [Method: POST, Route: client/transfert/effectuer]
@@ -789,11 +844,24 @@ in SYSTEMPATH/Database/BaseConnection.php on line 865.
  4 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  5 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:37:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: commission
+[Method: GET, Route: admin/commission]
+in SYSTEMPATH/Database/BaseConnection.php on line 865.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 2 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 5 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
  7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
  8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
  9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 12 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:30:53 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: table transaction_mm has no column named frais_retrait
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
@@ -805,11 +873,25 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
  6 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  7 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:37:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: commission
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
+ 1 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 2 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
  9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 14 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:30:53 --> [Caused by] SQLite3Exception: table transaction_mm has no column named frais_retrait
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
@@ -822,11 +904,26 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
  7 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  8 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:37:24 --> [Caused by] SQLite3Exception: Unable to prepare statement: no such table: commission
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
 10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 ERROR - 2026-07-20 13:42:54 --> table transaction_mm has no column named frais_retrait
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
@@ -839,11 +936,26 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
  7 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  8 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+ERROR - 2026-07-20 13:44:40 --> Unable to prepare statement: no such table: commission
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
 10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:42:54 --> CodeIgniter\Database\Exceptions\DatabaseException: table transaction_mm has no column named frais_retrait
 [Method: POST, Route: client/transfert/effectuer]
@@ -854,11 +966,24 @@ in SYSTEMPATH/Database/BaseConnection.php on line 865.
  4 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  5 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:44:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: commission
+[Method: GET, Route: admin/commission]
+in SYSTEMPATH/Database/BaseConnection.php on line 865.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 2 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 5 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
  7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
  8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
  9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 12 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:42:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: table transaction_mm has no column named frais_retrait
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
@@ -870,11 +995,25 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
  6 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  7 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:44:40 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: commission
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
+ 1 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 2 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
  9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 14 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
 CRITICAL - 2026-07-20 13:42:54 --> [Caused by] SQLite3Exception: table transaction_mm has no column named frais_retrait
 in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
@@ -887,9 +1026,193 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
  7 SYSTEMPATH/Model.php(668): CodeIgniter\BaseModel->insert()
  8 APPPATH/Controllers/TransactionController.php(239): CodeIgniter\Model->insert()
  9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\TransactionController->effectuerTransfert()
+=======
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:44:40 --> [Caused by] SQLite3Exception: Unable to prepare statement: no such table: commission
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+>>>>>>> Stashed changes
 10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
 11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
 12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
 13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
 14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+<<<<<<< Updated upstream
 15 SYSTEMPATH/rewrite.php(44): require_once('/home/rakotoarivelo/SI/EXAM/ExamProjetFinalS4/public/index.php')
+=======
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+ERROR - 2026-07-20 13:47:21 --> Unable to prepare statement: no such table: parametre
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:47:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: parametre
+[Method: GET, Route: admin/commission]
+in SYSTEMPATH/Database/BaseConnection.php on line 865.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 2 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 5 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:47:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: parametre
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
+ 1 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 2 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:47:21 --> [Caused by] SQLite3Exception: Unable to prepare statement: no such table: parametre
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+ERROR - 2026-07-20 13:47:31 --> Unable to prepare statement: no such table: parametre
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:47:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: parametre
+[Method: GET, Route: admin/commission]
+in SYSTEMPATH/Database/BaseConnection.php on line 865.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 2 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 5 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:47:31 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: parametre
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
+ 1 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 2 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 13:47:31 --> [Caused by] SQLite3Exception: Unable to prepare statement: no such table: parametre
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/CommissionModel.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/CommissionController.php(16): App\Models\CommissionModel->getPourcentage()
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->index()
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+>>>>>>> Stashed changes
+CRITICAL - 2026-07-20 14:02:20 --> ErrorException: Undefined array key "id"
+[Method: POST, Route: admin/commission/update]
+in APPPATH/Models/CommissionModel.php on line 48.
+ 1 APPPATH/Models/CommissionModel.php(48): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/CommissionController.php(36): App\Models\CommissionModel->setPourcentage()
+ 3 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->update()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 14:02:25 --> ErrorException: Undefined array key "id"
+[Method: POST, Route: admin/commission/update]
+in APPPATH/Models/CommissionModel.php on line 48.
+ 1 APPPATH/Models/CommissionModel.php(48): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/CommissionController.php(36): App\Models\CommissionModel->setPourcentage()
+ 3 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->update()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')
+CRITICAL - 2026-07-20 14:05:18 --> ErrorException: Undefined array key "id"
+[Method: POST, Route: admin/commission/update]
+in APPPATH/Models/CommissionModel.php on line 48.
+ 1 APPPATH/Models/CommissionModel.php(48): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/CommissionController.php(36): App\Models\CommissionModel->setPourcentage()
+ 3 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\CommissionController->update()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 6 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ 9 SYSTEMPATH/rewrite.php(44): require_once('/home/hiraina/Documents/Pages Web/L2/S4/CodeIgniter 4/examFinal/ExamProjetFinalS4/public/index.php')

@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BaremeFraisModel;
-use App\Models\ParametreModel;
 use App\Models\UtilisateurModel;
 use App\Models\TransactionMmModel;
 use App\Models\CommissionModel;
@@ -14,14 +13,14 @@ class TransactionController extends BaseController {
     protected $utilisateurModel;
     protected $transactionModel;
     protected $baremeFraisModel;
-    protected $parametreModel;
+    protected $commissionModel;
     protected $prefixeModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->transactionModel = new TransactionMmModel();
         $this->baremeFraisModel = new BaremeFraisModel();
-        $this->parametreModel = new ParametreModel();
+        $this->commissionModel = new CommissionModel();
         $this->prefixeModel = new PrefixeModel();
     }
 
@@ -223,14 +222,14 @@ class TransactionController extends BaseController {
                                 (int) $operateurExpediteur['id'] !== (int) $operateurRecepteur['id'];
 
         if ($operateursDifferents) {
-            $pourcentageCommission = (float) $this->parametreModel->getValeur('commission_transfert_inter_operateur', '2.5');
+            $pourcentageCommission = $this->commissionModel->getPourcentage(2.5);
             $commission = round($montant * ($pourcentageCommission / 100), 2);
         }
 
         $inclureFraisRetrait = $this->request->getPost('inclure_frais_retrait') === '1';
         $fraisRetrait = $inclureFraisRetrait ? $this->calculerFrais(2, $montant) : 0.0;
-        $frais = $fraisTransfert;
-        $total = $montant + $frais + $fraisRetrait + $commission;
+        $frais = $fraisTransfert + $fraisRetrait;
+        $total = $montant + $frais + $commission;
 
         if ((float) $client['solde'] < $total) {
             return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission.');

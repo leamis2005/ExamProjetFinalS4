@@ -45,12 +45,23 @@ CREATE TABLE transaction_mm (
     montant REAL NOT NULL,
     frais REAL DEFAULT 0,
     frais_retrait REAL DEFAULT 0,
-    commission REAL DEFAULT 0,
+    commission REAL NOT NULL DEFAULT 0,
     inclure_frais_retrait INTEGER DEFAULT 0,
     date_operation DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (type_operation_id) REFERENCES type_operation(id),
     FOREIGN KEY (expediteur) REFERENCES utilisateur(id),
     FOREIGN KEY (recepteur) REFERENCES utilisateur(id)
+);
+
+CREATE TABLE parametre (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cle TEXT UNIQUE NOT NULL,
+    valeur TEXT NOT NULL
+);
+
+CREATE TABLE commission (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pourcentage REAL NOT NULL
 );
 
 CREATE TABLE transaction_detail (
@@ -62,20 +73,40 @@ CREATE TABLE transaction_detail (
     FOREIGN KEY (destinataire) REFERENCES utilisateur(id)
 );
 
-CREATE TABLE parametre (
-    cle TEXT PRIMARY KEY,
-    valeur TEXT NOT NULL
-);
+INSERT INTO commission(pourcentage)
+VALUES (2.5);
 
-INSERT INTO operateur(nom) VALUES ('yas'), ('autre operateur');
+INSERT INTO parametre(cle, valeur)
+VALUES ('commission_transfert_inter_operateur', '2.5');
 
-INSERT INTO prefixe(prefixe, operateur_id) VALUES ('034', 1), ('038', 1);
+INSERT INTO operateur(nom)
+VALUES
+('Orange'),
+('Airtel'),
+('Telma');
 
-INSERT INTO type_utilisateur(nom) VALUES ('ADMIN'), ('CLIENT');
+INSERT INTO prefixe(prefixe, operateur_id)
+VALUES
+('032',1),
+('033',2),
+('037',2),
+('034',3),
+('038',3);
 
-INSERT INTO utilisateur(telephone, solde, type_utilisateur_id) VALUES ('0000000000', 0, 1);
+INSERT INTO type_utilisateur(nom)
+VALUES
+('ADMIN'),
+('CLIENT');
 
-INSERT INTO type_operation(nom) VALUES ('Depot'), ('Retrait'), ('Transfert');
+INSERT INTO utilisateur(telephone, solde, type_utilisateur_id)
+VALUES
+('0000000000',0,1);
+
+INSERT INTO type_operation(nom)
+VALUES
+('Depot'),
+('Retrait'),
+('Transfert');
 
 INSERT INTO bareme_frais(type_operation_id,montant_min,montant_max,frais)
 VALUES
@@ -90,9 +121,18 @@ VALUES
 (2,500001,1000000,2500),
 (2,1000001,2000000,3000),
 (3,100,1000,50),
-(3,1001,5000,50),
+CREATE VIEW v_gain_operateur AS
+SELECT
+    SUM(frais) AS gain_total
+FROM transaction_mm;
 (3,5001,10000,100),
-(3,10001,25000,200),
+CREATE VIEW v_situation_client AS
+SELECT
+    id,
+    telephone,
+    solde
+FROM utilisateur
+WHERE type_utilisateur_id = 2;
 (3,25001,50000,400),
 (3,50001,100000,800),
 (3,100001,250000,1500),

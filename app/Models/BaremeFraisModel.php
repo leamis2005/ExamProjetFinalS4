@@ -36,6 +36,23 @@ class BaremeFraisModel extends Model {
                         ->get()
                         ->getResultArray();
     }
+
+    public function getGainsParCategorie(): array {
+        $row = $this->db->table('transaction_mm')
+                        ->select('COALESCE(SUM(transaction_mm.frais), 0) AS gains_internes')
+                        ->select('COALESCE(SUM(CASE WHEN transaction_mm.type_operation_id = 3 AND transaction_mm.commission > 0 THEN transaction_mm.commission ELSE 0 END), 0) AS gains_inter_operateurs')
+                        ->get()
+                        ->getFirstRow('array') ?? [];
+
+        $gainsInternes = (float) ($row['gains_internes'] ?? 0);
+        $gainsInterOperateurs = (float) ($row['gains_inter_operateurs'] ?? 0);
+
+        return [
+            'gains_internes' => $gainsInternes,
+            'gains_inter_operateurs' => $gainsInterOperateurs,
+            'gain_total' => $gainsInternes + $gainsInterOperateurs,
+        ];
+    }
 }
 
 ?>
