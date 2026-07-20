@@ -36,12 +36,12 @@ class AuthController extends BaseController {
         if ((int)$utilisateur['type_utilisateur_id'] === 1) {
             session()->set('admin_id', $utilisateur['id']);
             session()->set('admin_telephone', $utilisateur['telephone']);
-            return redirect()->to('admin/clients')->with('message', 'Connexion administrateur réussie.');
+            return redirect()->to('admin/clients')->with('bienvenue', 'Bienvenue admin');
         }
 
         session()->set('client_id', $utilisateur['id']);
         session()->set('client_telephone', $utilisateur['telephone']);
-        return redirect()->to('client/dashboard')->with('message', 'Connexion réussie.');
+        return redirect()->to('client/dashboard')->with('bienvenue', 'Bienvenue ' . $utilisateur['telephone']);
     }
 
     public function logout() {

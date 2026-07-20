@@ -7,6 +7,9 @@
 </head>
 <body>
 <div class="container mt-4">
+    <?php if (session()->getFlashdata('bienvenue')): ?>
+        <div class="alert alert-info"><?= esc(session()->getFlashdata('bienvenue')) ?></div>
+    <?php endif; ?>
     <?php if (session()->getFlashdata('message')): ?>
         <div class="alert alert-success"><?= esc(session()->getFlashdata('message')) ?></div>
     <?php endif; ?>
