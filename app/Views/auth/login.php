@@ -4,7 +4,6 @@
 
 <div class="auth-card">
     <div class="brand">
-        <div class="logo">M</div>
         <h1>Connexion</h1>
         <p>Accédez à votre espace Mobile Money</p>
     </div>
