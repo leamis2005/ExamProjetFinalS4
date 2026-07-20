@@ -31,11 +31,11 @@ class CreateUtilisateurTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('telephone');
         $this->forge->addForeignKey('type_utilisateur_id', 'type_utilisateur', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('utilisateur');
+        $this->forge->createTable('utilisateur', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('utilisateur');
+        $this->forge->dropTable('utilisateur', true);
     }
 }

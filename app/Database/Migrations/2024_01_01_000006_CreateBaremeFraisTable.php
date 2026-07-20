@@ -34,11 +34,11 @@ class CreateBaremeFraisTable extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('type_operation_id', 'type_operation', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('bareme_frais');
+        $this->forge->createTable('bareme_frais', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('bareme_frais');
+        $this->forge->dropTable('bareme_frais', true);
     }
 }

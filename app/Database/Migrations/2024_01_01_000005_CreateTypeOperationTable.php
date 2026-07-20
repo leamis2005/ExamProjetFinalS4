@@ -21,11 +21,11 @@ class CreateTypeOperationTable extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('nom');
-        $this->forge->createTable('type_operation');
+        $this->forge->createTable('type_operation', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('type_operation');
+        $this->forge->dropTable('type_operation', true);
     }
 }

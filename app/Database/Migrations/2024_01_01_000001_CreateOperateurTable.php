@@ -20,11 +20,11 @@ class CreateOperateurTable extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('operateur');
+        $this->forge->createTable('operateur', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('operateur');
+        $this->forge->dropTable('operateur', true);
     }
 }

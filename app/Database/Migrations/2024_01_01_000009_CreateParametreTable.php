@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTypeUtilisateurTable extends Migration
+class CreateParametreTable extends Migration
 {
     public function up()
     {
@@ -14,18 +14,22 @@ class CreateTypeUtilisateurTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'nom' => [
-                'type' => 'TEXT',
-                'null' => false,
+            'cle' => [
+                'type'       => 'TEXT',
+                'null'       => false,
+            ],
+            'valeur' => [
+                'type'       => 'TEXT',
+                'null'       => false,
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey('nom');
-        $this->forge->createTable('type_utilisateur', true);
+        $this->forge->addUniqueKey('cle');
+        $this->forge->createTable('parametre', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('type_utilisateur', true);
+        $this->forge->dropTable('parametre', true);
     }
 }

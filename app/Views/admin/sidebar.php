@@ -15,6 +15,12 @@ $active = $active ?? '';
         <a class="nav-link <?= $active === 'prefixes' ? 'active' : '' ?>" href="<?= site_url('admin/prefixes') ?>">
             Préfixes
         </a>
+        <a class="nav-link <?= $active === 'commission' ? 'active' : '' ?>" href="<?= site_url('admin/commission') ?>">
+            Commissions
+        </a>
+        <a class="nav-link <?= $active === 'situation' ? 'active' : '' ?>" href="<?= site_url('admin/situation') ?>">
+            Situation opérateurs
+        </a>
         <a class="nav-link logout" href="<?= site_url('logout') ?>">
             Déconnexion
         </a>

@@ -4,18 +4,25 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BaremeFraisModel;
+use App\Models\ParametreModel;
 use App\Models\UtilisateurModel;
 use App\Models\TransactionMmModel;
+use App\Models\CommissionModel;
+use App\Models\PrefixeModel;
 
 class TransactionController extends BaseController {
     protected $utilisateurModel;
     protected $transactionModel;
     protected $baremeFraisModel;
+    protected $parametreModel;
+    protected $prefixeModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->transactionModel = new TransactionMmModel();
         $this->baremeFraisModel = new BaremeFraisModel();
+        $this->parametreModel = new ParametreModel();
+        $this->prefixeModel = new PrefixeModel();
     }
 
     protected function calculerFrais(int $typeOperationId, float $montant): float {
@@ -206,10 +213,24 @@ class TransactionController extends BaseController {
 
         $montant = (float) $this->request->getPost('montant');
         $frais = $this->calculerFrais(3, $montant);
-        $total = $montant + $frais;
+
+        $expediteurTelephone = $client['telephone'];
+        $operateurExpediteur = $this->prefixeModel->getOperateurByTelephone($expediteurTelephone);
+        $operateurRecepteur = $this->prefixeModel->getOperateurByTelephone($recepteurTelephone);
+
+        $commission = 0.0;
+        $operateursDifferents = $operateurExpediteur && $operateurRecepteur &&
+                                (int) $operateurExpediteur['id'] !== (int) $operateurRecepteur['id'];
+
+        if ($operateursDifferents) {
+            $pourcentageCommission = (float) $this->parametreModel->getValeur('commission_transfert_inter_operateur', '2.5');
+            $commission = round($montant * ($pourcentageCommission / 100), 2);
+        }
+
+        $total = $montant + $frais + $commission;
 
         if ((float) $client['solde'] < $total) {
-            return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant et les frais.');
+            return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission.');
         }
 
         $this->transactionModel->insert([
@@ -218,6 +239,7 @@ class TransactionController extends BaseController {
             'recepteur' => $recepteur['id'],
             'montant' => $montant,
             'frais' => $frais,
+            'commission' => $commission,
             'date_operation' => date('Y-m-d H:i:s'),
         ]);
 
@@ -233,6 +255,10 @@ class TransactionController extends BaseController {
 
         if ($frais > 0) {
             $message .= ' Frais appliqués : ' . number_format($frais, 2, ',', ' ') . ' Ar.';
+        }
+
+        if ($commission > 0) {
+            $message .= ' Commission inter-opérateur : ' . number_format($commission, 2, ',', ' ') . ' Ar.';
         }
 
         return redirect()->to('client/dashboard')->with('message', $message);
