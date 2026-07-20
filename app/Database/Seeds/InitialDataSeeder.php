@@ -9,17 +9,13 @@ class InitialDataSeeder extends Seeder
     public function run()
     {
         $this->db->table('operateur')->insertBatch([
-            ['nom' => 'Orange'],
-            ['nom' => 'Airtel'],
-            ['nom' => 'Telma'],
+            ['nom' => 'yas'],
+            ['nom' => 'autre operateur'],
         ]);
 
         $this->db->table('prefixe')->insertBatch([
-            ['prefixe' => '032', 'operateur_id' => 1],
-            ['prefixe' => '033', 'operateur_id' => 2],
-            ['prefixe' => '037', 'operateur_id' => 2],
-            ['prefixe' => '034', 'operateur_id' => 3],
-            ['prefixe' => '038', 'operateur_id' => 3],
+            ['prefixe' => '034', 'operateur_id' => 1],
+            ['prefixe' => '038', 'operateur_id' => 1],
         ]);
 
         $this->db->table('type_utilisateur')->insertBatch([

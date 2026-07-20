@@ -20,7 +20,11 @@ class PrefixeModel extends Model {
             }
         }
 
-        return null;
+        return $this->db->table('operateur')
+                        ->select('operateur.*')
+                        ->where('operateur.nom', 'autre operateur')
+                        ->get()
+                        ->getFirstRow('array');
     }
 }
 

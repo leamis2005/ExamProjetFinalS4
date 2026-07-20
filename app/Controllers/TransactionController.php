@@ -212,7 +212,7 @@ class TransactionController extends BaseController {
         }
 
         $montant = (float) $this->request->getPost('montant');
-        $frais = $this->calculerFrais(3, $montant);
+        $fraisTransfert = $this->calculerFrais(3, $montant);
 
         $expediteurTelephone = $client['telephone'];
         $operateurExpediteur = $this->prefixeModel->getOperateurByTelephone($expediteurTelephone);
@@ -227,13 +227,10 @@ class TransactionController extends BaseController {
             $commission = round($montant * ($pourcentageCommission / 100), 2);
         }
 
-        $total = $montant + $frais + $commission;
         $inclureFraisRetrait = $this->request->getPost('inclure_frais_retrait') === '1';
-
-        $fraisTransfert = $this->calculerFrais(3, $montant);
         $fraisRetrait = $inclureFraisRetrait ? $this->calculerFrais(2, $montant) : 0.0;
-        $frais = $fraisTransfert + $fraisRetrait;
-        $total = $montant + $frais;
+        $frais = $fraisTransfert;
+        $total = $montant + $frais + $fraisRetrait + $commission;
 
         if ((float) $client['solde'] < $total) {
             return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission.');
@@ -245,11 +242,8 @@ class TransactionController extends BaseController {
             'recepteur' => $recepteur['id'],
             'montant' => $montant,
             'frais' => $frais,
-<<<<<<< Updated upstream
-            'commission' => $commission,
-=======
             'frais_retrait' => $fraisRetrait,
->>>>>>> Stashed changes
+            'commission' => $commission,
             'date_operation' => date('Y-m-d H:i:s'),
         ]);
 
