@@ -4,12 +4,15 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UtilisateurModel;
+use App\Models\PrefixeModel;
 
 class AuthController extends BaseController {
     protected $utilisateurModel;
+    protected $prefixeModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
+        $this->prefixeModel = new PrefixeModel();
     }
 
     public function login() {
@@ -28,7 +31,16 @@ class AuthController extends BaseController {
             ->first();
 
         if (!$utilisateur) {
-            return redirect()->back()->withInput()->with('error', 'Aucun compte associé à ce numéro.');
+            if (!$this->prefixeValide($telephone)) {
+                return redirect()->back()->withInput()->with('error', 'Le numéro ne commence par aucun préfixe d\'opérateur valide (032, 033, 034, 037, 038...).');
+            }
+
+            $id = $this->utilisateurModel->insert([
+                'telephone'           => $telephone,
+                'solde'               => 0,
+                'type_utilisateur_id' => 2,
+            ]);
+            $utilisateur = $this->utilisateurModel->find($id);
         }
 
         session()->regenerate();
@@ -42,6 +54,22 @@ class AuthController extends BaseController {
         session()->set('client_id', $utilisateur['id']);
         session()->set('client_telephone', $utilisateur['telephone']);
         return redirect()->to('client/dashboard')->with('bienvenue', 'Bienvenue ' . $utilisateur['telephone']);
+    }
+
+    private function prefixeValide(string $telephone): bool {
+        $prefixes = $this->prefixeModel->findColumn('prefixe');
+
+        if (empty($prefixes)) {
+            return false;
+        }
+
+        foreach ($prefixes as $prefixe) {
+            if (str_starts_with($telephone, (string)$prefixe)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function logout() {

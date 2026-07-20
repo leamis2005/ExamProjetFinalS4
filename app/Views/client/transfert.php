@@ -1,13 +1,16 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('client/sidebar', ['active' => 'transfert']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?php $client = $client ?? []; ?>
 
-<h1>Transfert</h1>
+<h1 class="mb-4">Transfert</h1>
 
-<p><strong>Compte :</strong> <?= esc($client['telephone']) ?></p>
-<p><strong>Solde actuel :</strong> <?= number_format((float) $client['solde'], 2, ',', ' ') ?> Ar</p>
+<p class="text-muted">Compte : <strong><?= esc($client['telephone']) ?></strong> — Solde actuel : <strong><?= number_format((float) $client['solde'], 2, ',', ' ') ?> Ar</strong></p>
 
 <form method="post" action="<?= site_url('client/transfert/effectuer') ?>" class="w-50">
     <div class="mb-3">
@@ -20,7 +23,6 @@
         <div class="form-text">Le montant minimum est de 100 Ar.</div>
     </div>
     <button type="submit" class="btn btn-primary">Effectuer le transfert</button>
-    <a href="<?= site_url('client/dashboard') ?>" class="btn btn-secondary">Retour</a>
 </form>
 
 <?= $this->endSection() ?>

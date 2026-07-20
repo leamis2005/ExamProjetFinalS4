@@ -1,11 +1,14 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('client/sidebar', ['active' => 'depot']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
-<h1>Dépôt</h1>
+<h1 class="mb-4">Dépôt</h1>
 
-<p><strong>Compte :</strong> <?= esc($client['telephone']) ?></p>
-<p><strong>Solde actuel :</strong> <?= number_format((float)$client['solde'], 2, ',', ' ') ?> Ar</p>
+<p class="text-muted">Compte : <strong><?= esc($client['telephone']) ?></strong> — Solde actuel : <strong><?= number_format((float)$client['solde'], 2, ',', ' ') ?> Ar</strong></p>
 
 <form method="post" action="<?= site_url('client/depot/effectuer') ?>" class="w-50">
     <div class="mb-3">
@@ -15,9 +18,6 @@
         <div class="form-text">Le montant minimum est de 100 Ar.</div>
     </div>
     <button type="submit" class="btn btn-success">Effectuer le dépôt</button>
-    <a href="<?= site_url('client/dashboard') ?>" class="btn btn-secondary">Retour</a>
-    <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger">Déconnexion</a>
-    <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger">Déconnexion</a>
 </form>
 
 <?= $this->endSection() ?>

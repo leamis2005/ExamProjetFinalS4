@@ -1,5 +1,9 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('client/sidebar', ['active' => 'historique']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?php
@@ -7,9 +11,9 @@ $client = $client ?? [];
 $operations = $operations ?? [];
 ?>
 
-<h1>Historique des opérations</h1>
+<h1 class="mb-4">Historique des opérations</h1>
 
-<p><strong>Compte :</strong> <?= esc($client['telephone']) ?></p>
+<p class="text-muted">Compte : <strong><?= esc($client['telephone']) ?></strong></p>
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -41,7 +45,5 @@ $operations = $operations ?? [];
     <?php endif; ?>
     </tbody>
 </table>
-
-<a href="<?= site_url('client/dashboard') ?>" class="btn btn-secondary">Retour</a>
 
 <?= $this->endSection() ?>

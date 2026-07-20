@@ -1,18 +1,28 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('client/sidebar', ['active' => 'dashboard']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?php $client = $client ?? []; ?>
 
-<h1>Tableau de bord client</h1>
+<h1 class="mb-4">Tableau de bord</h1>
 
-<p><strong>Téléphone :</strong> <?= esc($client['telephone']) ?></p>
-<p><strong>Solde :</strong> <?= number_format((float)$client['solde'], 2, ',', ' ') ?> Ar</p>
-
-<a href="<?= site_url('client/depot') ?>" class="btn btn-success me-2">Faire un dépôt</a>
-<a href="<?= site_url('client/retrait') ?>" class="btn btn-warning me-2">Faire un retrait</a>
-<a href="<?= site_url('client/transfert') ?>" class="btn btn-primary me-2">Faire un transfert</a>
-<a href="<?= site_url('client/historique') ?>" class="btn btn-info me-2">Voir l'historique</a>
-<a href="<?= site_url('logout') ?>" class="btn btn-outline-danger">Déconnexion</a>
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="border rounded p-3 bg-light">
+            <div class="text-muted small text-uppercase">Téléphone</div>
+            <div class="fs-5 fw-semibold"><?= esc($client['telephone']) ?></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="border rounded p-3 bg-light">
+            <div class="text-muted small text-uppercase">Solde</div>
+            <div class="fs-5 fw-semibold"><?= number_format((float)$client['solde'], 2, ',', ' ') ?> Ar</div>
+        </div>
+    </div>
+</div>
 
 <?= $this->endSection() ?>

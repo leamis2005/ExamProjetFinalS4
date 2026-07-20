@@ -4,7 +4,6 @@
 
 <h1>Gestion des comptes clients</h1>
 
-<a href="<?= site_url('admin/clients/create') ?>" class="btn btn-primary mb-3">Nouveau client</a>
 <a href="<?= site_url('admin/prefixes') ?>" class="btn btn-outline-secondary mb-3">Préfixes</a>
 <a href="<?= site_url('logout') ?>" class="btn btn-outline-danger mb-3 float-end">Déconnexion</a>
 

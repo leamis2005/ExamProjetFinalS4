@@ -4,6 +4,7 @@
 
 <h1>Gestion des préfixes</h1>
 
+<a href="<?= site_url('admin/clients') ?>" class="btn btn-secondary mb-3 me-2">Retour</a>
 <a href="<?= site_url('admin/prefixes/ajouter') ?>" class="btn btn-primary mb-3">Ajouter un préfixe</a>
 
 <table class="table table-bordered table-striped">
