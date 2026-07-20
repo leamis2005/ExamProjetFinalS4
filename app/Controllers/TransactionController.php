@@ -228,8 +228,8 @@ class TransactionController extends BaseController {
 
         $inclureFraisRetrait = $this->request->getPost('inclure_frais_retrait') === '1';
         $fraisRetrait = $inclureFraisRetrait ? $this->calculerFrais(2, $montant) : 0.0;
-        $frais = $fraisTransfert + $fraisRetrait;
-        $total = $montant + $frais + $commission;
+        $frais = $fraisTransfert;
+        $total = $montant + $frais + $fraisRetrait + $commission;
 
         if ((float) $client['solde'] < $total) {
             return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour couvrir le montant, les frais et la commission.');
