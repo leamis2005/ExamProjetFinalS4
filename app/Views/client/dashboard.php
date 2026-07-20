@@ -1,12 +1,28 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('client/sidebar', ['active' => 'dashboard']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
-<h1>Tableau de bord client</h1>
+<?php $client = $client ?? []; ?>
 
-<p><strong>Téléphone :</strong> <?= esc($client['telephone']) ?></p>
-<p><strong>Solde :</strong> <?= number_format((float)$client['solde'], 2, ',', ' ') ?> Ar</p>
+<h1 class="mb-4">Tableau de bord</h1>
 
-<a href="<?= site_url('admin/clients') ?>" class="btn btn-secondary">Retour</a>
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="border rounded p-3 bg-light">
+            <div class="text-muted small text-uppercase">Téléphone</div>
+            <div class="fs-5 fw-semibold"><?= esc($client['telephone']) ?></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="border rounded p-3 bg-light">
+            <div class="text-muted small text-uppercase">Solde</div>
+            <div class="fs-5 fw-semibold"><?= number_format((float)$client['solde'], 2, ',', ' ') ?> Ar</div>
+        </div>
+    </div>
+</div>
 
 <?= $this->endSection() ?>

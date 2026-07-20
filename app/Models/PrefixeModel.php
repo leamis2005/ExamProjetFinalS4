@@ -8,6 +8,7 @@ class PrefixeModel extends Model {
     protected $table = 'prefixe';
     protected $primaryKey = 'id';
     protected $allowedFields = ['prefixe', 'operateur_id'];
+    protected $useTimestamps = false;
 }
 
 ?>

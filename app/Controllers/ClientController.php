@@ -5,14 +5,17 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UtilisateurModel;
 use App\Models\TypeUtilisateurModel;
+use App\Models\PrefixeModel;
 
 class ClientController extends BaseController {
     protected $utilisateurModel;
     protected $typeUtilisateurModel;
+    protected $prefixeModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->typeUtilisateurModel = new TypeUtilisateurModel();
+        $this->prefixeModel = new PrefixeModel();
     }
 
     public function index() {
@@ -37,6 +40,12 @@ class ClientController extends BaseController {
             return redirect()->back()
                              ->withInput()
                              ->with('errors', $this->validator->getErrors());
+        }
+
+        if (!$this->prefixeValide($this->request->getPost('telephone'))) {
+            return redirect()->back()
+                             ->withInput()
+                             ->with('errors', ['telephone' => 'Le numéro ne commence par aucun préfixe d\'opérateur valide (032, 033, 034, 037, 038...).']);
         }
 
         $this->utilisateurModel->insert([
@@ -74,6 +83,12 @@ class ClientController extends BaseController {
             return redirect()->back()
                              ->withInput()
                              ->with('errors', $this->validator->getErrors());
+        }
+
+        if (!$this->prefixeValide($this->request->getPost('telephone'))) {
+            return redirect()->back()
+                             ->withInput()
+                             ->with('errors', ['telephone' => 'Le numéro ne commence par aucun préfixe d\'opérateur valide (032, 033, 034, 037, 038...).']);
         }
 
         $this->utilisateurModel->update($id, [
@@ -126,6 +141,22 @@ class ClientController extends BaseController {
         }
 
         return view('client/dashboard', ['client' => $client]);
+    }
+
+    private function prefixeValide(string $telephone): bool {
+        $prefixes = $this->prefixeModel->findColumn('prefixe');
+
+        if (empty($prefixes)) {
+            return false;
+        }
+
+        foreach ($prefixes as $prefixe) {
+            if (str_starts_with($telephone, (string)$prefixe)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
