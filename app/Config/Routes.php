@@ -29,3 +29,13 @@ $routes->get('client/login/(:any)', 'ClientController::login/$1', ['filter' => '
 $routes->get('client/dashboard', 'ClientController::dashboard', ['filter' => 'auth']);
 $routes->get('client/depot', 'TransactionController::depot', ['filter' => 'auth']);
 $routes->post('client/depot/effectuer', 'TransactionController::effectuerDepot', ['filter' => 'auth']);
+$routes->get('client/login/(:any)', 'ClientController::login/$1');
+$routes->get('client/dashboard', 'ClientController::dashboard');
+$routes->get('client/retrait', 'TransactionController::retrait');
+$routes->post('client/retrait/effectuer', 'TransactionController::effectuerRetrait');
+$routes->get('client/transfert', 'TransactionController::transfert');
+$routes->post('client/transfert/effectuer', 'TransactionController::effectuerTransfert');
+$routes->get('client/historique', 'TransactionController::historique');
+$routes->get('client/depot', 'TransactionController::depot');
+$routes->post('client/depot/effectuer', 'TransactionController::effectuerDepot');
+$routes->get('admin/tableau-de-bord', 'TableauDeBordController::index');
