@@ -83,7 +83,20 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
    Éditez ensuite le fichier `.env` pour régler la `baseURL`, la base de données, etc.
 
-3. Lancer le serveur de développement intégré (il pointe sur le dossier `public`) :
+3. Importer la base SQLite depuis `base.sql` :
+
+   ```bash
+   sqlite3 writable/database.db ".read base.sql"
+   ```
+
+   Si vous avez modifié `base.sql` et que vous voulez recréer la base depuis zéro :
+
+   ```bash
+   rm writable/database.db
+   sqlite3 writable/database.db ".read base.sql"
+   ```
+
+4. Lancer le serveur de développement intégré (il pointe sur le dossier `public`) :
 
    ```bash
    php spark serve

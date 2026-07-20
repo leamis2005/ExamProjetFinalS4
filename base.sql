@@ -6,47 +6,80 @@ CREATE TABLE operateur (
 CREATE TABLE prefixe (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     prefixe TEXT UNIQUE NOT NULL,
-    operateur_id INTEGER,
-    FOREIGN KEY(operateur_id) REFERENCES operateur(id)
+    operateur_id INTEGER NOT NULL,
+    FOREIGN KEY (operateur_id) REFERENCES operateur(id)
 );
 
-CREATE TABLE client (
+CREATE TABLE type_utilisateur (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE utilisateur (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
     telephone TEXT UNIQUE NOT NULL,
-    nom TEXT,
-    solde REAL DEFAULT 0
+    solde REAL DEFAULT 0,
+    type_utilisateur_id INTEGER NOT NULL,
+    FOREIGN KEY (type_utilisateur_id) REFERENCES type_utilisateur(id)
 );
 
 CREATE TABLE type_operation (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom TEXT UNIQUE
+    nom TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE bareme_frais (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    type_operation_id INTEGER,
-    montant_min REAL,
-    montant_max REAL,
-    frais REAL,
-    FOREIGN KEY(type_operation_id)
-        REFERENCES type_operation(id)
+    type_operation_id INTEGER NOT NULL,
+    montant_min REAL NOT NULL,
+    montant_max REAL NOT NULL,
+    frais REAL NOT NULL,
+    FOREIGN KEY (type_operation_id) REFERENCES type_operation(id)
 );
 
 CREATE TABLE transaction_mm (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    type_operation_id INTEGER,
+    type_operation_id INTEGER NOT NULL,
     expediteur INTEGER,
     recepteur INTEGER,
-    montant REAL,
-    frais REAL,
+    montant REAL NOT NULL,
+    frais REAL DEFAULT 0,
     date_operation DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(type_operation_id)
-        REFERENCES type_operation(id),
-    FOREIGN KEY(expediteur)
-        REFERENCES client(id),
-    FOREIGN KEY(recepteur)
-        REFERENCES client(id)
+
+    FOREIGN KEY (type_operation_id) REFERENCES type_operation(id),
+    FOREIGN KEY (expediteur) REFERENCES utilisateur(id),
+    FOREIGN KEY (recepteur) REFERENCES utilisateur(id)
 );
+
+INSERT INTO operateur(nom)
+VALUES
+('Orange'),
+('Airtel'),
+('Telma');
+
+INSERT INTO prefixe(prefixe, operateur_id)
+VALUES
+('032',1),
+('033',2),
+('037',2),
+('034',3),
+('038',3);
+
+INSERT INTO type_utilisateur(nom)
+VALUES
+('ADMIN'),
+('CLIENT');
+
+INSERT INTO utilisateur(nom, telephone, solde, type_utilisateur_id)
+VALUES
+('Administrateur','0000000000',0,1);
+
+INSERT INTO type_operation(nom)
+VALUES
+('Depot'),
+('Retrait'),
+('Transfert');
 
 INSERT INTO bareme_frais(type_operation_id,montant_min,montant_max,frais)
 VALUES
@@ -61,30 +94,16 @@ VALUES
 (2,500001,1000000,2500),
 (2,1000001,2000000,3000);
 
-INSERT INTO type_operation(nom)
-VALUES
-('Depot'),
-('Retrait'),
-('Transfert');
-
-INSERT INTO prefixe(prefixe,operateur_id)
-VALUES
-('033',2),
-('037',2);
-
-INSERT INTO operateur(nom)
-VALUES ('Orange'),
-('Airtel'),
-('Telma');
-
 CREATE VIEW v_gain_operateur AS
 SELECT
-SUM(frais) AS gain_total
+    SUM(frais) AS gain_total
 FROM transaction_mm;
 
 CREATE VIEW v_situation_client AS
 SELECT
-telephone,
-nom,
-solde
-FROM client;
+    id,
+    nom,
+    telephone,
+    solde
+FROM utilisateur
+WHERE type_utilisateur_id = 2;
