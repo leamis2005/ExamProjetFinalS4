@@ -27,7 +27,6 @@
                     <td><?= esc($p['operateur_nom'] ?? $p['operateur_id']) ?></td>
                     <td>
                         <a href="<?= site_url('admin/prefixes/modifier/' . $p['id']) ?>" class="btn btn-sm btn-warning">Modifier</a>
-                        <a href="<?= site_url('admin/prefixes/supprimer/' . $p['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce préfixe ?')">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
