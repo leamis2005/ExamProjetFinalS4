@@ -19,6 +19,9 @@ $telephone = session()->get('client_telephone') ?? '';
         <a class="nav-link <?= $active === 'transfert' ? 'active' : '' ?>" href="<?= site_url('client/transfert') ?>">
             <span class="ico"></span> Transfert
         </a>
+        <a class="nav-link <?= $active === 'transfert-multiple' ? 'active' : '' ?>" href="<?= site_url('client/transfert-multiple') ?>">
+            <span class="ico"></span> Envoi multiple
+        </a>
         <a class="nav-link <?= $active === 'historique' ? 'active' : '' ?>" href="<?= site_url('client/historique') ?>">
             <span class="ico"></span> Historique
         </a>

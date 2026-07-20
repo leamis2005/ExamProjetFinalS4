@@ -19,7 +19,7 @@ $active = $active ?? '';
             Commissions
         </a>
         <a class="nav-link <?= $active === 'situation' ? 'active' : '' ?>" href="<?= site_url('admin/situation') ?>">
-            Situation opérateurs
+            Montants à reverser
         </a>
         <a class="nav-link logout" href="<?= site_url('logout') ?>">
             Déconnexion

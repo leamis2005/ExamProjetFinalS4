@@ -27,6 +27,7 @@
         <label class="form-check-label" for="inclure_frais_retrait">Inclure les frais de retrait</label>
     </div>
     <button type="submit" class="btn btn-primary">Effectuer le transfert</button>
+    <a href="<?= site_url('client/transfert-multiple') ?>" class="btn btn-outline-primary ms-2">Envoi multiple</a>
 </form>
 
 <?= $this->endSection() ?>

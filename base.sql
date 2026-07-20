@@ -1,6 +1,6 @@
 CREATE TABLE operateur (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom TEXT NOT NULL
+    nom TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE prefixe (
@@ -44,11 +44,19 @@ CREATE TABLE transaction_mm (
     recepteur INTEGER,
     montant REAL NOT NULL,
     frais REAL DEFAULT 0,
+    frais_retrait REAL DEFAULT 0,
+    commission REAL NOT NULL DEFAULT 0,
+    inclure_frais_retrait INTEGER DEFAULT 0,
     date_operation DATETIME DEFAULT CURRENT_TIMESTAMP,
-
     FOREIGN KEY (type_operation_id) REFERENCES type_operation(id),
     FOREIGN KEY (expediteur) REFERENCES utilisateur(id),
     FOREIGN KEY (recepteur) REFERENCES utilisateur(id)
+);
+
+CREATE TABLE parametre (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cle TEXT UNIQUE NOT NULL,
+    valeur TEXT NOT NULL
 );
 
 CREATE TABLE commission (
@@ -56,8 +64,20 @@ CREATE TABLE commission (
     pourcentage REAL NOT NULL
 );
 
+CREATE TABLE transaction_detail (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    transaction_id INTEGER NOT NULL,
+    destinataire INTEGER NOT NULL,
+    montant REAL NOT NULL,
+    FOREIGN KEY (transaction_id) REFERENCES transaction_mm(id),
+    FOREIGN KEY (destinataire) REFERENCES utilisateur(id)
+);
+
 INSERT INTO commission(pourcentage)
-VALUES (5);
+VALUES (2.5);
+
+INSERT INTO parametre(cle, valeur)
+VALUES ('commission_transfert_inter_operateur', '2.5');
 
 INSERT INTO operateur(nom)
 VALUES
@@ -101,9 +121,18 @@ VALUES
 (2,500001,1000000,2500),
 (2,1000001,2000000,3000),
 (3,100,1000,50),
-(3,1001,5000,50),
+CREATE VIEW v_gain_operateur AS
+SELECT
+    SUM(frais) AS gain_total
+FROM transaction_mm;
 (3,5001,10000,100),
-(3,10001,25000,200),
+CREATE VIEW v_situation_client AS
+SELECT
+    id,
+    telephone,
+    solde
+FROM utilisateur
+WHERE type_utilisateur_id = 2;
 (3,25001,50000,400),
 (3,50001,100000,800),
 (3,100001,250000,1500),
@@ -111,16 +140,8 @@ VALUES
 (3,500001,1000000,2500),
 (3,1000001,2000000,3000);
 
-CREATE VIEW v_gain_operateur AS
-SELECT
-    SUM(frais) AS gain_total
-FROM transaction_mm;
+INSERT INTO parametre(cle, valeur) VALUES ('commission_transfert_inter_operateur', '2.5');
 
-CREATE VIEW v_situation_client AS
-SELECT
-    id,
-    nom,
-    telephone,
-    solde
-FROM utilisateur
-WHERE type_utilisateur_id = 2;
+CREATE VIEW v_gain_operateur AS SELECT SUM(frais) AS gain_total FROM transaction_mm;
+
+CREATE VIEW v_situation_client AS SELECT id, telephone, solde FROM utilisateur WHERE type_utilisateur_id = 2;

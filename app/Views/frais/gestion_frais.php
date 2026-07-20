@@ -7,39 +7,68 @@
     <a href="<?= site_url('admin/frais/create') ?>" class="btn btn-primary">Ajouter un barème</a>
 </div>
 
+<?php
+$gainsInternes = $gainsInternes ?? 0;
+$gainsInterOperateurs = $gainsInterOperateurs ?? 0;
+$gainTotal = $gainTotal ?? 0;
+?>
+
 <div class="row g-3 mb-4">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">Gains générés par les frais</div>
+    <div class="col-md-4">
+        <div class="card card-accent green">
             <div class="card-body">
-                <table class="table table-sm mb-0">
-                    <thead>
-                    <tr>
-                        <th>Type d'opération</th>
-                        <th class="text-end">Gain total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php if (! empty($gains)): ?>
-                        <?php foreach ($gains as $gain): ?>
-                            <tr>
-                                <td><?= esc($gain['type_operation_nom'] ?? 'Inconnu') ?></td>
-                                <td class="text-end"><?= number_format((float) ($gain['gain_total'] ?? 0), 2, ',', ' ') ?> Ar</td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="2" class="text-center text-muted">Aucune opération facturée pour le moment.</td>
-                        </tr>
-                    <?php endif; ?>
-                    </tbody>
-                </table>
+                <h6 class="text-muted">Gains internes</h6>
+                <h3 class="mb-0"><?= number_format((float) $gainsInternes, 2, ',', ' ') ?> Ar</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-accent blue">
+            <div class="card-body">
+                <h6 class="text-muted">Gains des autres opérateurs</h6>
+                <h3 class="mb-0"><?= number_format((float) $gainsInterOperateurs, 2, ',', ' ') ?> Ar</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-accent yellow">
+            <div class="card-body">
+                <h6 class="text-muted">Total gains</h6>
+                <h3 class="mb-0"><?= number_format((float) $gainTotal, 2, ',', ' ') ?> Ar</h3>
             </div>
         </div>
     </div>
 </div>
 
 <div class="card">
+    <div class="card-header">Répartition des gains</div>
+    <div class="card-body p-0">
+        <table class="table table-bordered mb-0">
+            <thead>
+            <tr>
+                <th>Catégorie</th>
+                <th class="text-end">Montant</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gains internes</td>
+                    <td class="text-end"><?= number_format((float) $gainsInternes, 2, ',', ' ') ?> Ar</td>
+                </tr>
+                <tr>
+                    <td>Gains provenant des autres opérateurs</td>
+                    <td class="text-end"><?= number_format((float) $gainsInterOperateurs, 2, ',', ' ') ?> Ar</td>
+                </tr>
+                <tr class="table-light fw-semibold">
+                    <td>Total</td>
+                    <td class="text-end"><?= number_format((float) $gainTotal, 2, ',', ' ') ?> Ar</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mt-4">
     <div class="card-header">Barèmes de frais configurés</div>
     <div class="card-body p-0">
         <table class="table table-bordered mb-0">

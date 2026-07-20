@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ParametreModel;
+use App\Models\CommissionModel;
 
 class CommissionController extends BaseController {
-    protected $parametreModel;
+    protected $commissionModel;
 
     public function __construct() {
-        $this->parametreModel = new ParametreModel();
+        $this->commissionModel = new CommissionModel();
     }
 
     public function index() {
-        $commission = $this->parametreModel->getValeur('commission_transfert_inter_operateur', '2.5');
+        $commission = $this->commissionModel->getPourcentage(2.5);
 
         return view('commission/gestion_commission', [
             'commission' => $commission,
@@ -33,7 +33,7 @@ class CommissionController extends BaseController {
 
         $commission = (float)$this->request->getPost('commission');
 
-        $this->parametreModel->setValeur('commission_transfert_inter_operateur', (string)$commission);
+        $this->commissionModel->setPourcentage($commission);
 
         return redirect()->to('admin/commission')->with('message', 'Commission mise à jour avec succès.');
     }

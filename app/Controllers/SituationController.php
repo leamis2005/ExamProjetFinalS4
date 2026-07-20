@@ -40,21 +40,19 @@ class SituationController extends BaseController {
             if (!isset($parOperateur[$idOperateur])) {
                 $parOperateur[$idOperateur] = [
                     'operateur_nom' => $nomOperateur,
-                    'total_commission' => 0,
+                    'montant_a_reverser' => 0,
                     'nombre_transferts' => 0,
-                    'transferts' => [],
                 ];
             }
 
-            $parOperateur[$idOperateur]['total_commission'] += (float) ($t['commission'] ?? 0);
+            $parOperateur[$idOperateur]['montant_a_reverser'] += (float) ($t['commission'] ?? 0);
             $parOperateur[$idOperateur]['nombre_transferts']++;
-            $parOperateur[$idOperateur]['transferts'][] = $t;
         }
 
-        usort($parOperateur, static fn ($a, $b) => $b['total_commission'] <=> $a['total_commission']);
+        usort($parOperateur, static fn ($a, $b) => $b['montant_a_reverser'] <=> $a['montant_a_reverser']);
 
         return view('situation/situation_operateurs', [
-            'transfertsInterOperateur' => $parOperateur,
+            'reversAuxOperateurs' => $parOperateur,
         ]);
     }
 }

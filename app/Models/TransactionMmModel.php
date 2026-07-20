@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class TransactionMmModel extends Model {
     protected $table = 'transaction_mm';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['type_operation_id', 'expediteur', 'recepteur', 'montant', 'frais', 'commission', 'date_operation'];
+    protected $allowedFields = ['type_operation_id', 'expediteur', 'recepteur', 'montant', 'frais', 'frais_retrait', 'commission', 'date_operation'];
     protected $returnType = 'array';
     protected $useTimestamps = false;
 

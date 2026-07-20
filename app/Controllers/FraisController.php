@@ -16,9 +16,13 @@ class FraisController extends BaseController {
     }
 
     public function index() {
+        $gainsParCategorie = $this->baremeFraisModel->getGainsParCategorie();
+
         return view('frais/gestion_frais', [
             'baremes' => $this->baremeFraisModel->getAllWithTypeOperation(),
-            'gains' => $this->baremeFraisModel->getGainsByOperation(),
+            'gainsInternes' => $gainsParCategorie['gains_internes'],
+            'gainsInterOperateurs' => $gainsParCategorie['gains_inter_operateurs'],
+            'gainTotal' => $gainsParCategorie['gain_total'],
         ]);
     }
 

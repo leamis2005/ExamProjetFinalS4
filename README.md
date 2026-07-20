@@ -83,26 +83,31 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
    Éditez ensuite le fichier `.env` pour régler la `baseURL`, la base de données, etc.
 
-3. Importer la base SQLite depuis `base.sql` :
+3. Réinitialiser la base de données avec le script fourni :
 
-   ```bash
-   sqlite3 writable/database.db ".read base.sql"
-   ```
+    ```bash
+    php reset_db.php
+    ```
 
-   Si vous avez modifié `base.sql` et que vous voulez recréer la base depuis zéro :
-
-   ```bash
-   rm writable/database.db
-   sqlite3 writable/database.db ".read base.sql"
-   ```
+    Ce script recrée automatiquement `writable/database.db` avec toutes les tables, colonnes, opérateurs (yas + autre operateur), préfixes (034, 038), barèmes de frais, paramètres et données initiales.
 
 4. Lancer le serveur de développement intégré (il pointe sur le dossier `public`) :
 
-   ```bash
-   php spark serve
-   ```
+    ```bash
+    php spark serve
+    ```
 
-   Puis ouvrez `http://localhost:8080` dans votre navigateur.
+    Puis ouvrez `http://localhost:8080` dans votre navigateur.
+
+### Important
+
+Si vous avez effacé la base de données, relancez d'abord :
+
+```bash
+php reset_db.php
+```
+
+avant de démarrer le serveur.
 
 ### Important
 

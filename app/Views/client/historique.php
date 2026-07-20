@@ -41,7 +41,7 @@ $operations = $operations ?? [];
                     <td><?= esc($operation['expediteur_telephone'] ?? '-') ?></td>
                     <td><?= esc($operation['recepteur_telephone'] ?? '-') ?></td>
                     <td class="text-success fw-semibold"><?= number_format((float) $operation['montant'], 2, ',', ' ') ?> Ar</td>
-                    <td><?= number_format((float) ($operation['frais'] - ($operation['frais_retrait'] ?? 0)), 2, ',', ' ') ?> Ar</td>
+                    <td><?= number_format((float) $operation['frais'], 2, ',', ' ') ?> Ar</td>
                     <td><?= number_format((float) ($operation['frais_retrait'] ?? 0), 2, ',', ' ') ?> Ar</td>
                     <td class="text-primary fw-semibold"><?= number_format((float) ($operation['montant'] + ($operation['frais_retrait'] ?? 0)), 2, ',', ' ') ?> Ar</td>
                 </tr>
