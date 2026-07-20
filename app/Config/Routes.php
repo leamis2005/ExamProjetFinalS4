@@ -20,3 +20,5 @@ $routes->get('admin/clients/delete/(:num)', 'ClientController::delete/$1');
 
 $routes->get('client/login/(:any)', 'ClientController::login/$1');
 $routes->get('client/dashboard', 'ClientController::dashboard');
+$routes->get('client/depot', 'TransactionController::depot');
+$routes->post('client/depot/effectuer', 'TransactionController::effectuerDepot');

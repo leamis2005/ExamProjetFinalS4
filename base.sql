@@ -72,7 +72,11 @@ VALUES
 
 INSERT INTO utilisateur(telephone, solde, type_utilisateur_id)
 VALUES
-('0000000000',0,1);
+('0000000000',0,1),('0321234567',10000,2),
+('0339876543',5000,2),
+('0345678901',2000,2),
+('0373456789',15000,2),
+('0382345678',8000,2);
 
 INSERT INTO type_operation(nom)
 VALUES
