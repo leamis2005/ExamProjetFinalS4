@@ -3,17 +3,25 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BaremeFraisModel;
 use App\Models\UtilisateurModel;
 use App\Models\TransactionMmModel;
-use App\Models\TypeOperationModel;
 
 class TransactionController extends BaseController {
     protected $utilisateurModel;
     protected $transactionModel;
+    protected $baremeFraisModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->transactionModel = new TransactionMmModel();
+        $this->baremeFraisModel = new BaremeFraisModel();
+    }
+
+    protected function calculerFrais(int $typeOperationId, float $montant): float {
+        $bareme = $this->baremeFraisModel->getApplicableBareme($typeOperationId, $montant);
+
+        return $bareme ? (float) $bareme['frais'] : 0.0;
     }
 
     public function depot() {
@@ -56,13 +64,14 @@ class TransactionController extends BaseController {
         }
 
         $montant = (float)$this->request->getPost('montant');
+        $frais = $this->calculerFrais(1, $montant);
 
         $this->transactionModel->insert([
             'type_operation_id' => 1,
             'expediteur'        => null,
             'recepteur'         => $clientId,
             'montant'           => $montant,
-            'frais'             => 0,
+            'frais'             => $frais,
             'date_operation'    => date('Y-m-d H:i:s'),
         ]);
 
@@ -70,7 +79,13 @@ class TransactionController extends BaseController {
             'solde' => (float)$client['solde'] + $montant,
         ]);
 
-        return redirect()->to('client/dashboard')->with('message', 'Dépôt de ' . number_format($montant, 2, ',', ' ') . ' Ar effectué avec succès.');
+        $message = 'Dépôt de ' . number_format($montant, 2, ',', ' ') . ' Ar effectué avec succès.';
+
+        if ($frais > 0) {
+            $message .= ' Frais appliqués : ' . number_format($frais, 2, ',', ' ') . ' Ar.';
+        }
+
+        return redirect()->to('client/dashboard')->with('message', $message);
     }
 }
 

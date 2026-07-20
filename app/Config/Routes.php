@@ -10,6 +10,12 @@ $routes->get('login', 'AuthController::login');
 $routes->post('login/attempt', 'AuthController::attemptLogin');
 $routes->get('logout', 'AuthController::logout');
 $routes->get('admin/prefixes', 'PrefixeController::index');
+$routes->get('admin/frais', 'FraisController::index');
+$routes->get('admin/frais/create', 'FraisController::create');
+$routes->post('admin/frais/store', 'FraisController::store');
+$routes->get('admin/frais/edit/(:num)', 'FraisController::edit/$1');
+$routes->post('admin/frais/update/(:num)', 'FraisController::update/$1');
+$routes->get('admin/frais/delete/(:num)', 'FraisController::delete/$1');
 
 $routes->get('admin/clients', 'ClientController::index');
 $routes->get('admin/clients/create', 'ClientController::create');
