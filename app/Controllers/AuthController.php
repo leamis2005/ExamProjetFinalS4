@@ -13,10 +13,6 @@ class AuthController extends BaseController {
     }
 
     public function login() {
-        if (session()->get('client_id') || session()->get('admin_id')) {
-            return redirect()->to('/');
-        }
-
         return view('auth/login');
     }
 
@@ -50,6 +46,7 @@ class AuthController extends BaseController {
 
     public function logout() {
         session()->remove(['client_id', 'client_telephone', 'admin_id', 'admin_telephone']);
+        session()->regenerate(true);
         session()->destroy();
         return redirect()->to('login')->with('message', 'Déconnexion réussie.');
     }
