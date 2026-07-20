@@ -27,7 +27,6 @@
                     <td><?= number_format((float)$c['solde'], 2, ',', ' ') ?></td>
                     <td>
                         <a href="<?= site_url('admin/clients/edit/' . $c['id']) ?>" class="btn btn-sm btn-warning">Modifier</a>
-                        <a href="<?= site_url('admin/clients/delete/' . $c['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce client ?')">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
