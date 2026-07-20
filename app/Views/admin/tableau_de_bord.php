@@ -1,5 +1,9 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('sidebar') ?>
+<?= view('admin/sidebar', ['active' => 'dashboard']) ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?php
