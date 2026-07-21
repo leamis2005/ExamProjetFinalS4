@@ -222,7 +222,7 @@ class TransactionController extends BaseController {
                                 (int) $operateurExpediteur['id'] !== (int) $operateurRecepteur['id'];
 
         if ($operateursDifferents) {
-            $pourcentageCommission = $this->commissionModel->getPourcentage(2.5);
+            $pourcentageCommission = $this->commissionModel->getPourcentageForOperateur((int)$operateurExpediteur['id'], 2.5);
             $commission = round($montant * ($pourcentageCommission / 100), 2);
         }
 
@@ -371,7 +371,7 @@ class TransactionController extends BaseController {
                                 (int) $operateurExpediteur['id'] !== (int) $operateurRecepteur['id'];
 
         if ($operateursDifferents) {
-            $pourcentageCommission = (float) $this->parametreModel->getValeur('commission_transfert_inter_operateur', '2.5');
+            $pourcentageCommission = $this->commissionModel->getPourcentageForOperateur((int)$operateurExpediteur['id'], 2.5);
             $commission = round($montantTotal * ($pourcentageCommission / 100), 2);
         }
 

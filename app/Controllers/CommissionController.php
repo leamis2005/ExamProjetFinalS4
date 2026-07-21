@@ -13,17 +13,20 @@ class CommissionController extends BaseController {
     }
 
     public function index() {
-        $commission = $this->commissionModel->getPourcentage(2.5);
+        $operateurs = $this->commissionModel->getOperateursAvecCommission(2.5);
 
         return view('commission/gestion_commission', [
-            'commission' => $commission,
+            'operateurs' => $operateurs,
         ]);
     }
 
     public function update() {
-        $rules = [
-            'commission' => 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]',
-        ];
+        $operateurs = $this->commissionModel->getOperateursAvecCommission(2.5);
+
+        foreach ($operateurs as $operateur) {
+            $field = 'commission_' . $operateur['id'];
+            $rules[$field] = 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]';
+        }
 
         if (!$this->validate($rules)) {
             return redirect()->back()
@@ -31,10 +34,14 @@ class CommissionController extends BaseController {
                              ->with('errors', $this->validator->getErrors());
         }
 
-        $commission = (float)$this->request->getPost('commission');
+        foreach ($operateurs as $operateur) {
+            $field = 'commission_' . $operateur['id'];
+            $this->commissionModel->setPourcentageForOperateur(
+                (int) $operateur['id'],
+                (float) $this->request->getPost($field)
+            );
+        }
 
-        $this->commissionModel->setPourcentage($commission);
-
-        return redirect()->to('admin/commission')->with('message', 'Commission mise à jour avec succès.');
+        return redirect()->to('admin/commission')->with('message', 'Commissions mises à jour avec succès.');
     }
 }

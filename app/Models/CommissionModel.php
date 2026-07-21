@@ -34,10 +34,31 @@ class CommissionModel extends Model {
                 }
             }
         } catch (\Throwable) {
-            // Fall through to the file fallback when the database is not ready.
+            // Fall through to the default commission when the database is not ready.
         }
 
-        return $this->readFallbackCommission($default);
+        return $default;
+    }
+
+    public function getPourcentageForOperateur(int $operateurId, float $default = 2.5): float {
+        $key = 'commission_transfert_inter_operateur_' . $operateurId;
+
+        try {
+            if ($this->db->tableExists('parametre')) {
+                $row = $this->db->table('parametre')
+                    ->where('cle', $key)
+                    ->get()
+                    ->getFirstRow('array');
+
+                if ($row) {
+                    return (float) ($row['valeur'] ?? $default);
+                }
+            }
+        } catch (\Throwable) {
+            // Fall through to the global/default commission when the database is not ready.
+        }
+
+        return $this->getPourcentage($default);
     }
 
     public function setPourcentage(float $pourcentage): bool {
@@ -74,40 +95,59 @@ class CommissionModel extends Model {
                 ]);
             }
         } catch (\Throwable) {
-            // Fall through to the file fallback when the database is not ready.
+            // Fall through to the default commission when the database is not ready.
         }
 
-        return $this->writeFallbackCommission($pourcentage);
+        return false;
     }
 
-    protected function fallbackPath(): string {
-        return WRITEPATH . 'settings/commission.json';
-    }
+    public function setPourcentageForOperateur(int $operateurId, float $pourcentage): bool {
+        $key = 'commission_transfert_inter_operateur_' . $operateurId;
 
-    protected function readFallbackCommission(float $default): float {
-        $path = $this->fallbackPath();
+        try {
+            if ($this->db->tableExists('parametre')) {
+                $row = $this->db->table('parametre')
+                    ->where('cle', $key)
+                    ->get()
+                    ->getFirstRow('array');
 
-        if (! is_file($path)) {
-            return $default;
+                if ($row) {
+                    return (bool) $this->db->table('parametre')
+                        ->where('id', $row['id'])
+                        ->update(['valeur' => (string) $pourcentage]);
+                }
+
+                return (bool) $this->db->table('parametre')->insert([
+                    'cle' => $key,
+                    'valeur' => (string) $pourcentage,
+                ]);
+            }
+        } catch (\Throwable) {
+            // Fall through when the database is not ready.
         }
 
-        $data = json_decode((string) file_get_contents($path), true);
-
-        return is_array($data) && isset($data['pourcentage'])
-            ? (float) $data['pourcentage']
-            : $default;
+        return false;
     }
 
-    protected function writeFallbackCommission(float $pourcentage): bool {
-        $path = $this->fallbackPath();
-        $directory = dirname($path);
+    public function getOperateursAvecCommission(float $default = 2.5): array {
+        try {
+            if ($this->db->tableExists('operateur')) {
+                $operateurs = $this->db->table('operateur')
+                    ->get()
+                    ->getResultArray();
 
-        if (! is_dir($directory) && ! mkdir($directory, 0777, true) && ! is_dir($directory)) {
-            return false;
+                foreach ($operateurs as &$op) {
+                    $op['commission'] = $this->getPourcentageForOperateur((int) $op['id'], $default);
+                }
+
+                return $operateurs;
+            }
+        } catch (\Throwable) {
+            // Fall through when the database is not ready.
         }
 
-        return (bool) file_put_contents($path, json_encode([
-            'pourcentage' => $pourcentage,
-        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        return [];
     }
 }
+
+
